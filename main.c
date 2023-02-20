@@ -6,11 +6,12 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 08:48:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/02/20 09:33:53 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/02/20 09:50:21 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto.h"
+#include <mlx.h>
 
 int	init(t_level *level)
 {
@@ -25,8 +26,13 @@ int	init(t_level *level)
 int	main(int argc, char **argv)
 {
 	t_level	level;
+	void	*mlx;
+	void	*mlx_win;
 
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx_loop(mlx);
 	init(&level);
-	level.map = parse(argv[1]);
+	//level.map = parse(argv[1]);
 	return (0);
 }
