@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 08:48:50 by lebojo            #+#    #+#             */
-/*   Updated: 2023/02/20 10:22:20 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/02/22 01:00:15 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct s_data
 	char	exit;
 	char	collect;
 }	t_data;
+
+typedef struct s_params
+{
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+}	t_params;
 
 typedef struct s_requierements
 {
