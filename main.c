@@ -12,6 +12,7 @@
 
 #include "proto.h"
 #include <mlx.h>
+#include "libft/libft.h"
 
 #include <stdio.h>
 
@@ -30,14 +31,16 @@ int	key_hook(int keycode, t_params *prm)
 {
 	static int	x_pos = 0;
 	static int	y_pos = 0;
-	if (keycode == 2 || keycode == 124)
+	if (keycode == 2 || keycode == 124|| keycode == 65363 || keycode == 100)
 		x_pos += 50;
-	else if (keycode == 0 || keycode == 123)
+	else if (keycode == 0 || keycode == 123|| keycode == 65361 || keycode == 97)
 		x_pos -= 50;
-	else if (keycode == 13 || keycode == 126)
+	else if (keycode == 13 || keycode == 126|| keycode == 65362 || keycode == 113)
 		y_pos -= 50;
-	else if (keycode == 1 || keycode == 125)
+	else if (keycode == 1 || keycode == 125 || keycode == 65364 || keycode == 115)
 		y_pos += 50;
+	ft_putnbr_fd(keycode, 0);
+	ft_putstr_fd("\n", 0);
 	mlx_put_image_to_window(prm[0].mlx, prm[0].mlx_win, prm[0].img, x_pos, y_pos);
 	return (0);
 }
@@ -46,10 +49,10 @@ int	main(void)
 {
 	//t_level	level;
 	t_params 	prm;
-	char		*relative_path = "./mario.xpm";
+	char		*relative_path = "./assets/mario.xpm";
 	int			img_width;
 	int			img_height;
-	
+
 	prm.mlx = mlx_init();
 	prm.mlx_win = mlx_new_window(prm.mlx, 1920, 1080, "SoLong 2023 edition");
 	prm.img = mlx_xpm_file_to_image(prm.mlx, relative_path, &img_width, &img_height);
