@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 08:48:50 by lebojo            #+#    #+#             */
-/*   Updated: 2023/02/22 01:00:15 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/02/27 07:37:52 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ typedef struct s_data
 	char	collect;
 }	t_data;
 
+typedef struct s_path
+{
+	char	*empty;
+	char	*wall;
+	char	*player;
+	char	*exit;
+	char	*collect;
+	int		width;
+}	t_path;
+
 typedef struct s_params
 {
 	void	*mlx;
@@ -44,6 +54,7 @@ typedef struct s_requierements
 typedef struct s_level
 {
 	t_data	data;
+	t_path	texture;
 	char	*map;
 }	t_level;
 

@@ -37,10 +37,10 @@ $(PRINTF):
 			make -C printf
 
 %.o: %.c
-			$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+			$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx -O3 -c $< -o $@
 
 $(NAME): $(OBJ)
-			$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+			$(CC) $(OBJ) $(LIBFT) -Lmlx -lmlx -L/usr/lib -Imlx -lX11 -lXext -lm -lz -o $(NAME)
 
 clean:
 			${RM} ${OBJS}
