@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 08:52:31 by lebojo            #+#    #+#             */
-/*   Updated: 2023/02/20 09:34:29 by lebojo           ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   parse.c											:+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: lebojo <lebojo@student.42.fr>			  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2023/02/20 08:52:31 by lebojo			#+#	#+#			 */
+/*   Updated: 2023/04/04 15:00:57 by lebojo		   ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "proto.h"
@@ -41,10 +41,8 @@ char	*parse(char *file_path)
 	if (file == -1)
 		return (0);
 	while (read(file, &buffer, sizeof(char)) != 0)
-	{
-		parsed[i] = buffer;
-		i++;
-	}
+		parsed[i++] = buffer;
+	parsed[i] = '\0';
 	close(file);
 	return (parsed);
 }

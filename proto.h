@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   proto.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 08:48:50 by lebojo            #+#    #+#             */
-/*   Updated: 2023/03/05 14:39:51 by lebojo           ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   proto.h											:+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: lebojo <lebojo@student.42.fr>			  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2023/02/20 08:48:50 by lebojo			#+#	#+#			 */
+/*   Updated: 2023/04/02 00:06:58 by lebojo		   ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #ifndef PROTO_H
@@ -17,18 +17,25 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <mlx.h>
 
 # define NAME "BeachBall life simulator 2023 EXTREME edititon"
 # define NAME_SHORT "BBLS2EE"
 
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}	t_vector;
+
 typedef struct s_data
 {
-	int		size;
-	char	empty;
-	char	wall;
-	char	player;
-	char	exit;
-	char	collect;
+	t_vector	size;
+	char		empty;
+	char		wall;
+	char		player;
+	char		exit;
+	char		collect;
 }	t_data;
 
 typedef struct s_path
@@ -62,11 +69,6 @@ typedef struct s_level
 	char	*map;
 }	t_level;
 
-typedef struct s_vector
-{
-	int	x;
-	int	y;
-}	t_vector;
 
 
 /*PARSE.C			*/
@@ -78,4 +80,8 @@ int		parse_validity(t_level lvl);
 /*CONSOLE			*/
 int		error(char *str);
 int		info(char *str);
+
+/*BUILD				*/
+void	build_level(t_level lvl, t_params prm);
+
 #endif
