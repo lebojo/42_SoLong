@@ -46,3 +46,23 @@ char	*parse(char *file_path)
 	close(file);
 	return (parsed);
 }
+
+t_vector	map_size(char *map)
+{
+	t_vector	res;
+	int			i;
+
+	i = -1;
+	res.x = -1;
+	res.y = 1;
+	while (map[++i])
+	{
+		if (map[i] == '\n')
+		{
+			if (res.x == -1)
+				res.x = i;
+			res.y++;
+		}
+	}
+	return (res);
+}

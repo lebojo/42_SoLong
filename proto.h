@@ -72,16 +72,17 @@ typedef struct s_level
 
 
 /*PARSE.C			*/
-char	*parse(char *file_path);
+char		*parse(char *file_path);
+t_vector	map_size(char *map);
 
 /*VALIDITY			*/
-int		parse_validity(t_level lvl);
+int			parse_validity(t_level lvl);
 
 /*CONSOLE			*/
-int		error(char *str);
-int		info(char *str);
+int			error(char *str);
+int			info(char *str);
 
 /*BUILD				*/
-void	build_level(t_level lvl, t_params prm);
+void		build_level(t_level lvl, t_params prm);
 
 #endif

@@ -16,18 +16,19 @@
 
 void	init_level(t_level *level, char *file_path)
 {
-	level[0].data.collect = 'C';
-	level[0].data.empty = '0';
-	level[0].data.wall = '1';
-	level[0].data.exit = 'E';
-	level[0].data.player = 'P';
-	level[0].map = parse(file_path);
-	level[0].texture.collect = "./assets/coins.xpm";
-	level[0].texture.empty = "./assets/floor.xpm";
-	level[0].texture.wall = "./assets/wall.xpm";
-	level[0].texture.exit = "./assets/enemy.xpm";
-	level[0].texture.player = "./assets/player.xpm";
-	level[0].texture.width = 32;
+	level->data.collect = 'C';
+	level->data.empty = '0';
+	level->data.wall = '1';
+	level->data.exit = 'E';
+	level->data.player = 'P';
+	level->map = parse(file_path);
+	level->data.size = map_size(level->map);
+	level->texture.collect = "./assets/coins.xpm";
+	level->texture.empty = "./assets/floor.xpm";
+	level->texture.wall = "./assets/wall.xpm";
+	level->texture.exit = "./assets/enemy.xpm";
+	level->texture.player = "./assets/player.xpm";
+	level->texture.width = 32;
 }
 
 int	key_hook(int keycode, t_params *prm)
@@ -67,7 +68,7 @@ int	main(int argc, char **argv)
 	init_level(&level, argv[1]);
 	info("Level init");
 	prm.mlx = mlx_init();
-	prm.mlx_win = mlx_new_window(prm.mlx, 1088, 192, NAME);
+	prm.mlx_win = mlx_new_window(prm.mlx, level.data.size.x * level.texture.width, level.data.size.y * level.texture.width, NAME);
 	info("Building level...");
 	build_level(level, prm);
 	prm.img = mlx_xpm_file_to_image(prm.mlx, level.texture.player, &img_width, &img_height);
