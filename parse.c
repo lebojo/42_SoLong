@@ -28,41 +28,27 @@ int	file_char_len(char *file_path)
 	return (i);
 }
 
-char	*parse(char *file_path)
+void	parse(char *file_path, t_level *lvl)
 {
 	int		file;
 	int		i;
-	char	*parsed;
 	char	buffer;
 
-	parsed = malloc(sizeof(char) * file_char_len(file_path));
+	lvl->map = malloc(sizeof(char) * file_char_len(file_path));
 	file = open(file_path, O_RDONLY);
 	i = 0;
 	if (file == -1)
-		return (0);
+		return ;
 	while (read(file, &buffer, sizeof(char)) != 0)
-		parsed[i++] = buffer;
-	parsed[i] = '\0';
-	close(file);
-	return (parsed);
-}
-
-t_vector	map_size(char *map)
-{
-	t_vector	res;
-	int			i;
-
-	i = -1;
-	res.x = -1;
-	res.y = 1;
-	while (map[++i])
 	{
-		if (map[i] == '\n')
+		lvl->map[i++] = buffer;
+		if (buffer == '\n')
 		{
-			if (res.x == -1)
-				res.x = i;
-			res.y++;
+			if (lvl->data.size.x == -1)
+				lvl->data.size.x = i - 1;
+			lvl->data.size.y++;
 		}
 	}
-	return (res);
+	lvl->map[i] = '\0';
+	close(file);
 }

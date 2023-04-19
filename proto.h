@@ -50,9 +50,11 @@ typedef struct s_path
 
 typedef struct s_params
 {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
+	void		*mlx;
+	void		*mlx_win;
+	void		*img;
+	void		*floor;
+	t_vector	*pos;
 }	t_params;
 
 typedef struct s_requierements
@@ -60,20 +62,26 @@ typedef struct s_requierements
 	int	bool_player;
 	int	bool_exit;
 	int	bool_coins;
+	int	bool_path;
+	int	bool_wall;
 }	t_requierements;
 
 typedef struct s_level
 {
-	t_data	data;
-	t_path	texture;
-	char	*map;
+	t_data		data;
+	t_path		texture;
+	t_vector	player;
+	char		*map;
 }	t_level;
 
-
+typedef struct s_matrix
+{
+	t_vector	*coins;
+	t_vector	*wall;
+}	t_matrix;
 
 /*PARSE.C			*/
-char		*parse(char *file_path);
-t_vector	map_size(char *map);
+void		parse(char *file_path, t_level *lvl);
 
 /*VALIDITY			*/
 int			parse_validity(t_level lvl);
@@ -83,6 +91,6 @@ int			error(char *str);
 int			info(char *str);
 
 /*BUILD				*/
-void		build_level(t_level lvl, t_params prm);
+void		build_level(t_level *lvl, t_params prm);
 
 #endif
