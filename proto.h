@@ -31,6 +31,7 @@ typedef struct s_vector
 typedef struct s_data
 {
 	t_vector	size;
+	int			coins_max;
 	char		empty;
 	char		wall;
 	char		player;
@@ -63,20 +64,21 @@ typedef struct s_requierements
 	int	bool_wall;
 }	t_requierements;
 
+typedef struct s_player
+{
+	t_vector	pos;
+	int			coins;
+}	t_player;
+
 typedef struct s_level
 {
 	t_data		data;
 	t_path		texture;
-	t_vector	player;
+	t_player	player;
 	char		*map;
+	char		**map_matrix;
 	t_params	params;
 }	t_level;
-
-typedef struct s_matrix
-{
-	t_vector	*coins;
-	t_vector	*wall;
-}	t_matrix;
 
 /*PARSE.C			*/
 void		parse(char *file_path, t_level *lvl);
@@ -90,5 +92,11 @@ int			info(char *str);
 
 /*BUILD				*/
 void		build_level(t_level *lvl);
+
+/*MOVEMENTS			*/
+char		int_to_dir(int	key);
+char		move_id(t_vector m_pos, char **map_matrix, char dir);
+void		move_draw(t_level *lvl, char dir, char id);
+t_vector	pixel_to_matrix(t_vector pos);
 
 #endif

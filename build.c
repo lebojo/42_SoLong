@@ -19,7 +19,7 @@ int draw_cell(t_level *lvl, char c, t_params prm, t_vector pos)
 	if (c == lvl->data.player)
 	{
 		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.player, pos.x, pos.y);
-		lvl->player = pos;
+		lvl->player.pos = pos;
 	}
 	if (c == lvl->data.collect)
 		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.collect, pos.x, pos.y);
@@ -29,6 +29,7 @@ int draw_cell(t_level *lvl, char c, t_params prm, t_vector pos)
 		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.exit, pos.x, pos.y);
 	else if (c == lvl->data.wall)
 		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.wall, pos.x, pos.y);
+	lvl->map_matrix[(pos.y/32) - 1][pos.x/32] = c;
 	return (1);
 }
 
@@ -41,7 +42,7 @@ void build_level(t_level *lvl)
 	i = 0;
 	pos.x = 0;
 	pos.y = lvl->texture.width;
-
+	lvl->map_matrix[0] = malloc(sizeof(char) * lvl->data.size.x);
 	while (lvl->map[i])
 	{
 		cel = draw_cell(lvl, lvl->map[i], lvl->params, pos);
@@ -51,6 +52,7 @@ void build_level(t_level *lvl)
 		{
 			pos.x = 0;
 			pos.y += lvl->texture.width;
+			lvl->map_matrix[(pos.y/32) - 1] = malloc(sizeof(char) * (lvl->data.size.x + 1));
 		}
 		i++;
 	}

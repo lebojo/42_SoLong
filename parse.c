@@ -42,6 +42,8 @@ void	parse(char *file_path, t_level *lvl)
 	while (read(file, &buffer, sizeof(char)) != 0)
 	{
 		lvl->map[i++] = buffer;
+		if (buffer == lvl->data.collect)
+			lvl->data.coins_max++;
 		if (buffer == '\n')
 		{
 			if (lvl->data.size.x == -1)
