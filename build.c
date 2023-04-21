@@ -14,29 +14,25 @@
 
 int draw_cell(t_level *lvl, char c, t_params prm, t_vector pos)
 {
-	int	img_width;
-	int	img_height;
-
 	if (c == '\n')
 		return (0);
 	if (c == lvl->data.player)
 	{
-		prm.img = mlx_xpm_file_to_image(prm.mlx, lvl->texture.player, &img_width, &img_height);
+		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.player, pos.x, pos.y);
 		lvl->player = pos;
 	}
 	if (c == lvl->data.collect)
-		prm.img = mlx_xpm_file_to_image(prm.mlx, lvl->texture.collect, &img_width, &img_height);
+		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.collect, pos.x, pos.y);
 	else if (c == lvl->data.empty)
-		prm.img = mlx_xpm_file_to_image(prm.mlx, lvl->texture.empty, &img_width, &img_height);
+		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.empty, pos.x, pos.y);
 	else if (c == lvl->data.exit)
-		prm.img = mlx_xpm_file_to_image(prm.mlx, lvl->texture.exit, &img_width, &img_height);
+		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.exit, pos.x, pos.y);
 	else if (c == lvl->data.wall)
-		prm.img = mlx_xpm_file_to_image(prm.mlx, lvl->texture.wall, &img_width, &img_height);
-	mlx_put_image_to_window(prm.mlx, prm.mlx_win, prm.img, pos.x, pos.y);
+		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.wall, pos.x, pos.y);
 	return (1);
 }
 
-void build_level(t_level *lvl, t_params prm)
+void build_level(t_level *lvl)
 {
 	int i;
 	int cel;
@@ -44,10 +40,11 @@ void build_level(t_level *lvl, t_params prm)
 	
 	i = 0;
 	pos.x = 0;
-	pos.y = 0;
+	pos.y = lvl->texture.width;
+
 	while (lvl->map[i])
 	{
-		cel = draw_cell(lvl, lvl->map[i], prm, pos);
+		cel = draw_cell(lvl, lvl->map[i], lvl->params, pos);
 		if (cel != 0)
 			pos.x += lvl->texture.width;
 		else

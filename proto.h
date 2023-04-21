@@ -52,9 +52,6 @@ typedef struct s_params
 {
 	void		*mlx;
 	void		*mlx_win;
-	void		*img;
-	void		*floor;
-	t_vector	*pos;
 }	t_params;
 
 typedef struct s_requierements
@@ -72,6 +69,7 @@ typedef struct s_level
 	t_path		texture;
 	t_vector	player;
 	char		*map;
+	t_params	params;
 }	t_level;
 
 typedef struct s_matrix
@@ -91,6 +89,6 @@ int			error(char *str);
 int			info(char *str);
 
 /*BUILD				*/
-void		build_level(t_level *lvl, t_params prm);
+void		build_level(t_level *lvl);
 
 #endif
