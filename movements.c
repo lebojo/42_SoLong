@@ -41,7 +41,7 @@ char	int_to_dir(int	key)
 
 char	move_id(t_vector pos, char **map_matrix, char dir) //0 = move; 1 = move + coins; 2 = No move
 {
-	t_vector m_pos;
+	t_vector	m_pos;
 	
 	m_pos = pixel_to_matrix(pos);
 	if (dir == 'R')
@@ -57,16 +57,23 @@ char	move_id(t_vector pos, char **map_matrix, char dir) //0 = move; 1 = move + c
 
 void	move_draw(t_level *lvl, char dir, char id)
 {
+	t_vector	m_pos;
+
 	mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.empty, lvl->player.pos.x, lvl->player.pos.y);
 	if (dir == 'R' && id != lvl->data.wall)
 			lvl->player.pos.x += lvl->texture.width;
-	if (dir == 'L' && id != lvl->data.wall)
+	else if (dir == 'L' && id != lvl->data.wall)
 		lvl->player.pos.x -= lvl->texture.width;
-	if (dir == 'U' && id != lvl->data.wall)
+	else if (dir == 'U' && id != lvl->data.wall)
 		lvl->player.pos.y -= lvl->texture.width;
-	if (dir == 'D' && id != lvl->data.wall)
+	else if (dir == 'D' && id != lvl->data.wall)
 		lvl->player.pos.y += lvl->texture.width;
+	m_pos = pixel_to_matrix(lvl->player.pos);
 	if (id == lvl->data.collect)
+	{
+		lvl->map_matrix[m_pos.y][m_pos.x] = lvl->data.empty;
 		lvl->player.coins++;
+		print_score(lvl->player.coins, lvl->data.coins_max);
+	}
 	mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.player, lvl->player.pos.x, lvl->player.pos.y);
 }

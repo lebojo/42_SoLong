@@ -29,3 +29,11 @@ int info(char *str)
 	ft_putchar_fd('\n', 0);
 	return(0);
 }
+
+void	print_score(int min, int max)
+{
+	ft_putnbr_fd(min, 1);
+	ft_putchar_fd('/', 1);
+	ft_putnbr_fd(max, 1);
+	ft_putchar_fd('\n', 1);
+}

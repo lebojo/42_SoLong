@@ -80,6 +80,9 @@ typedef struct s_level
 	t_params	params;
 }	t_level;
 
+/*MAIN.C			*/
+int			key_hook(int keycode, t_level *lvl);
+
 /*PARSE.C			*/
 void		parse(char *file_path, t_level *lvl);
 
@@ -89,9 +92,11 @@ int			parse_validity(t_level lvl);
 /*CONSOLE			*/
 int			error(char *str);
 int			info(char *str);
+void		print_score(int min, int max);
 
 /*BUILD				*/
 void		build_level(t_level *lvl);
+void		draw_menu(t_level *lvl);
 
 /*MOVEMENTS			*/
 char		int_to_dir(int	key);

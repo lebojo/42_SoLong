@@ -47,10 +47,6 @@ int	key_hook(int keycode, t_level *lvl)
 	dir = int_to_dir(keycode);
 	id = move_id(lvl->player.pos, lvl->map_matrix, dir);
 	move_draw(lvl, dir, id);
-	ft_putnbr_fd(lvl->player.coins, 1);
-	ft_putchar_fd('/', 1);
-	ft_putnbr_fd(lvl->data.coins_max, 1);
-	ft_putchar_fd('\n', 1);
 	return (0);
 }
 
@@ -66,6 +62,7 @@ int	main(int argc, char **argv)
 	level.params.mlx_win = mlx_new_window(level.params.mlx, level.data.size.x * level.texture.width, (level.data.size.y + 1) * level.texture.width, NAME);
 	info("Building level...");
 	build_level(&level);
+	draw_menu(&level);
 	mlx_key_hook(level.params.mlx_win, key_hook, &level);
 	mlx_loop(level.params.mlx);
 }
