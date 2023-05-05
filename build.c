@@ -16,7 +16,7 @@ int draw_cell(t_level *lvl, char c, t_params prm, t_vector pos)
 {
 	if (c == '\n')
 		return (0);
-	if (c == lvl->data.player)
+	if (c == lvl->data.player || lvl->player.pos.x == -1)
 	{
 		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.empty, pos.x, pos.y);
 		lvl->player.pos = pos;
@@ -38,8 +38,6 @@ int	draw_player(t_level *l)
 	t_vector	pos;
 
 	pos = l->player.pos;
-	if (l->player.vel > 0)
-		l->player.vel -= 1;
 	mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->texture.player, pos.x, pos.y);
 	return (0);
 }

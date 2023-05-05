@@ -67,8 +67,8 @@ void	move_draw(t_level *lvl, char dir, char id)
 			info("You should'nt die broke");
 		return ;
 	}
-	if (id != lvl->data.wall)
-		mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.empty, lvl->player.pos.x, lvl->player.pos.y);
+	//if (id != lvl->data.wall)
+		//mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.empty, lvl->player.pos.x, lvl->player.pos.y);
 	if (dir == 'R' && id != lvl->data.wall)
 			lvl->player.pos.x += lvl->player.vel;
 	else if (dir == 'L' && id != lvl->data.wall)

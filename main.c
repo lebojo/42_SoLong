@@ -29,6 +29,7 @@ void	init_level(t_level *level)
 	level->data.coins_max = 0;
 	level->player.coins = 0;
 	level->player.vel = 0;
+	level->player.pos.x = -1;
 	level->texture.collect = mlx_xpm_file_to_image(level->params.mlx, "./assets/coins.xpm", &img_width, &img_height);
 	level->texture.empty = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor.xpm", &img_width, &img_height);
 	level->texture.wall = mlx_xpm_file_to_image(level->params.mlx, "./assets/wall.xpm", &img_width, &img_height);
@@ -45,9 +46,8 @@ int key_press(int keycode, t_level *lvl)
 
 	dir = int_to_dir(keycode);
 	id = move_id(lvl->player.pos, lvl->map_matrix, dir);
-	lvl->player.vel += 3;
-	ft_putnbr_fd(lvl->player.vel, 0);
-	move_draw(lvl, dir, id); // set the flag for the pressed key
+	lvl->player.vel += 1;
+	move_draw(lvl, dir, id);
 	build_level(lvl);
     return (0);
 }
@@ -59,7 +59,8 @@ int key_release(int keycode, t_level *lvl)
 
 	dir = int_to_dir(keycode);
 	id = move_id(lvl->player.pos, lvl->map_matrix, dir);
-	move_draw(lvl, dir, id);// clear the flag for the released key
+	lvl->player.vel = 0;
+	move_draw(lvl, dir, id);
     return (0);
 }
 int	main(int argc, char **argv)
@@ -79,9 +80,9 @@ int	main(int argc, char **argv)
 		error("But ok i'll start the menu.");
 		draw_menu(&level);
 	}
-	//mlx_loop_hook(level.params.mlx, build_level, &level);
-	mlx_hook(level.params.mlx_win, 2, 1, key_press, &level);
-    mlx_hook(level.params.mlx_win, 3, 1L<<1, key_release, &level);
+	mlx_loop_hook(level.params.mlx, build_level, &level);
+	mlx_hook(level.params.mlx_win, 2, 0, key_press, &level);
+    mlx_hook(level.params.mlx_win, 3, 0, key_release, &level);
 	mlx_loop_hook(level.params.mlx, draw_player, &level);
 	mlx_loop(level.params.mlx);
 }
