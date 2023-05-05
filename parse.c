@@ -39,6 +39,7 @@ void	parse(char *file_path, t_level *lvl)
 	i = 0;
 	if (file == -1)
 		return ;
+	info("Parsing map...");
 	while (read(file, &buffer, sizeof(char)) != 0)
 	{
 		lvl->map[i++] = buffer;
@@ -53,4 +54,5 @@ void	parse(char *file_path, t_level *lvl)
 	}
 	lvl->map[i] = '\0';
 	close(file);
+	info("Map parsed");
 }

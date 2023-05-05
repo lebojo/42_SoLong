@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-void	init_level(t_level *level, char *file_path)
+void	init_level(t_level *level)
 {
 	int			img_width;
 	int			img_height;
@@ -28,41 +28,60 @@ void	init_level(t_level *level, char *file_path)
 	level->data.size.y = 1;
 	level->data.coins_max = 0;
 	level->player.coins = 0;
-	parse(file_path, level);
-	level->map_matrix = malloc(sizeof(char *) * level->data.size.y);
+	level->player.vel = 0;
 	level->texture.collect = mlx_xpm_file_to_image(level->params.mlx, "./assets/coins.xpm", &img_width, &img_height);
 	level->texture.empty = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor.xpm", &img_width, &img_height);
 	level->texture.wall = mlx_xpm_file_to_image(level->params.mlx, "./assets/wall.xpm", &img_width, &img_height);
 	level->texture.exit = mlx_xpm_file_to_image(level->params.mlx, "./assets/enemy.xpm", &img_width, &img_height);
 	level->texture.player = mlx_xpm_file_to_image(level->params.mlx, "./assets/player.xpm", &img_width, &img_height);
 	level->texture.width = 32;
-	info("Level initiated");
+	info("Game initiated");
 }
 
-int	key_hook(int keycode, t_level *lvl)
+int key_press(int keycode, t_level *lvl)
 {
 	char	dir;
 	char	id;
 
 	dir = int_to_dir(keycode);
 	id = move_id(lvl->player.pos, lvl->map_matrix, dir);
-	move_draw(lvl, dir, id);
-	return (0);
+	lvl->player.vel += 3;
+	ft_putnbr_fd(lvl->player.vel, 0);
+	move_draw(lvl, dir, id); // set the flag for the pressed key
+	build_level(lvl);
+    return (0);
 }
 
+int key_release(int keycode, t_level *lvl)
+{
+    char	dir;
+	char	id;
+
+	dir = int_to_dir(keycode);
+	id = move_id(lvl->player.pos, lvl->map_matrix, dir);
+	move_draw(lvl, dir, id);// clear the flag for the released key
+    return (0);
+}
 int	main(int argc, char **argv)
 {
 	t_level		level;
 
-	if (argc != 2)
-		return(error("Args"));
-	info("Starting...");
 	level.params.mlx = mlx_init();
-	init_level(&level, argv[1]);
-	level.params.mlx_win = mlx_new_window(level.params.mlx, level.data.size.x * level.texture.width, (level.data.size.y + 1) * level.texture.width, NAME);
-	info("Building level...");
-	build_level(&level);
-	draw_menu(&level);
-	mlx_key_hook(level.params.mlx_win, key_hook, &level);
+	init_level(&level);
+	if (argc >= 2)
+	{
+		info("Starting...");
+		start_level(&level, argv[1]);
+	}
+	else
+	{
+		error("Args...");
+		error("But ok i'll start the menu.");
+		draw_menu(&level);
+	}
+	//mlx_loop_hook(level.params.mlx, build_level, &level);
+	mlx_hook(level.params.mlx_win, 2, 1, key_press, &level);
+    mlx_hook(level.params.mlx_win, 3, 1L<<1, key_release, &level);
+	mlx_loop_hook(level.params.mlx, draw_player, &level);
 	mlx_loop(level.params.mlx);
 }

@@ -59,15 +59,24 @@ void	move_draw(t_level *lvl, char dir, char id)
 {
 	t_vector	m_pos;
 
-	mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.empty, lvl->player.pos.x, lvl->player.pos.y);
+	if (id == lvl->data.exit)
+	{
+		if (lvl->player.coins >= lvl->data.coins_max)
+			exit(info("You win!"));
+		else
+			info("You should'nt die broke");
+		return ;
+	}
+	if (id != lvl->data.wall)
+		mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.empty, lvl->player.pos.x, lvl->player.pos.y);
 	if (dir == 'R' && id != lvl->data.wall)
-			lvl->player.pos.x += lvl->texture.width;
+			lvl->player.pos.x += lvl->player.vel;
 	else if (dir == 'L' && id != lvl->data.wall)
-		lvl->player.pos.x -= lvl->texture.width;
+		lvl->player.pos.x -= lvl->player.vel;
 	else if (dir == 'U' && id != lvl->data.wall)
-		lvl->player.pos.y -= lvl->texture.width;
+		lvl->player.pos.y -= lvl->player.vel;
 	else if (dir == 'D' && id != lvl->data.wall)
-		lvl->player.pos.y += lvl->texture.width;
+		lvl->player.pos.y += lvl->player.vel;
 	m_pos = pixel_to_matrix(lvl->player.pos);
 	if (id == lvl->data.collect)
 	{
@@ -75,5 +84,5 @@ void	move_draw(t_level *lvl, char dir, char id)
 		lvl->player.coins++;
 		print_score(lvl->player.coins, lvl->data.coins_max);
 	}
-	mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.player, lvl->player.pos.x, lvl->player.pos.y);
+	draw_player(lvl);
 }
