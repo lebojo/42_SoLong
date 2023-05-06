@@ -68,7 +68,7 @@ typedef struct s_player
 {
 	t_vector	pos;
 	int			coins;
-	int			vel;
+	t_vector	vel;
 }	t_player;
 
 typedef struct s_level
@@ -78,12 +78,12 @@ typedef struct s_level
 	t_player	player;
 	char		*map;
 	char		**map_matrix;
+	int			key[4];
 	t_params	params;
 }	t_level;
 
 /*MAIN.C			*/
 void		init_level(t_level *level);
-int			key_hook(int keycode, t_level *lvl);
 
 /*PARSE.C			*/
 void		parse(char *file_path, t_level *lvl);
@@ -98,15 +98,27 @@ void		print_score(int min, int max);
 void		print_pos(char *title, t_vector v);
 
 /*BUILD				*/
-int			build_level(t_level *lvl);
-void		draw_menu(t_level *lvl);
+int			build_matrix(t_level *lvl);
 void		start_level(t_level *lvl, char *path);
-int			draw_player(t_level *l);
 
 /*MOVEMENTS			*/
-char		int_to_dir(int	key);
+int			int_to_dir(int	key);
 char		move_id(t_vector m_pos, char **map_matrix, char dir);
 void		move_draw(t_level *lvl, char dir, char id);
 t_vector	pixel_to_matrix(t_vector pos);
+
+/*DRAW				*/
+int			draw_player(t_level *l);
+void		draw_level(t_level *lvl);
+
+/*PHYSICS			*/
+int			physics_process(t_level *l);
+
+/*
+MENU
+*/
+
+/*START				*/
+void		draw_menu(t_level *lvl);
 
 #endif

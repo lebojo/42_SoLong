@@ -20,22 +20,22 @@ t_vector	pixel_to_matrix(t_vector pos)
 	return (pos); 
 }
 
-char	int_to_dir(int	key)
+int	int_to_dir(int	key) //1 = gauche, 2 = haut, 3 = droite, 4 = bas, 0 = pas reconnu
 {
 	if (key == 2 || key == 124
 		|| key == 65363 || key == 100)
-		return ('R');
+		return (3);
 	else if (key == 0 || key == 123
 		|| key == 65361 || key == 97)
-		return ('L');
+		return (1);
 	else if (key == 13 || key == 126
 		|| key == 65362 || key == 119)
-		return ('U');
+		return (2);
 	else if (key == 1 || key == 125
 		|| key == 65364 || key == 115)
-		return ('D');
+		return (4);
 	else if (key == 53 || key == 65307)
-		exit(0);
+		exit(info("Game closed"));
 	return (0);
 }
 
@@ -53,36 +53,4 @@ char	move_id(t_vector pos, char **map_matrix, char dir) //0 = move; 1 = move + c
 	if (dir == 'D')
 		return (map_matrix[m_pos.y + 1][m_pos.x]);
 	return (0);
-}
-
-void	move_draw(t_level *lvl, char dir, char id)
-{
-	t_vector	m_pos;
-
-	if (id == lvl->data.exit)
-	{
-		if (lvl->player.coins >= lvl->data.coins_max)
-			exit(info("You win!"));
-		else
-			info("You should'nt die broke");
-		return ;
-	}
-	//if (id != lvl->data.wall)
-		//mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.empty, lvl->player.pos.x, lvl->player.pos.y);
-	if (dir == 'R' && id != lvl->data.wall)
-			lvl->player.pos.x += lvl->player.vel;
-	else if (dir == 'L' && id != lvl->data.wall)
-		lvl->player.pos.x -= lvl->player.vel;
-	else if (dir == 'U' && id != lvl->data.wall)
-		lvl->player.pos.y -= lvl->player.vel;
-	else if (dir == 'D' && id != lvl->data.wall)
-		lvl->player.pos.y += lvl->player.vel;
-	m_pos = pixel_to_matrix(lvl->player.pos);
-	if (id == lvl->data.collect)
-	{
-		lvl->map_matrix[m_pos.y][m_pos.x] = lvl->data.empty;
-		lvl->player.coins++;
-		print_score(lvl->player.coins, lvl->data.coins_max);
-	}
-	draw_player(lvl);
 }
