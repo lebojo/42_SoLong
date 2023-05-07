@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:15:19 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/06 03:25:07 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/07 03:37:56 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,11 @@ int draw_cell(t_level *lvl, char c, t_params prm, t_vector pos)
 	return (1);
 }
 
-// void	move_draw(t_level *lvl, char dir, char id)
-// {
-// 	t_vector	m_pos;
-
-// 	if (id == lvl->data.exit)
-// 	{
-// 		if (lvl->player.coins >= lvl->data.coins_max)
-// 			exit(info("You win!"));
-// 		else
-// 			info("You should'nt die broke");
-// 		return ;
-// 	}
-// 	if (dir == 'R' && id != lvl->data.wall)
-// 			lvl->player.pos.x += lvl->player.vel;
-// 	else if (dir == 'L' && id != lvl->data.wall)
-// 		lvl->player.pos.x -= lvl->player.vel;
-// 	else if (dir == 'U' && id != lvl->data.wall)
-// 		lvl->player.pos.y -= lvl->player.vel;
-// 	else if (dir == 'D' && id != lvl->data.wall)
-// 		lvl->player.pos.y += lvl->player.vel;
-// 	m_pos = pixel_to_matrix(lvl->player.pos);
-// 	if (id == lvl->data.collect)
-// 	{
-// 		lvl->map_matrix[m_pos.y][m_pos.x] = lvl->data.empty;
-// 		lvl->player.coins++;
-// 		print_score(lvl->player.coins, lvl->data.coins_max);
-// 	}
-// }
+void	draw_screen(t_level *l)
+{
+	draw_level(l);
+	draw_player(l);
+}
 
 void draw_level(t_level *lvl)
 {

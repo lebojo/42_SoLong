@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <mlx.h>
+# include "mlx/mlx.h"
 
 # define NAME "BeachBall life simulator 2023 EXTREME edititon"
 # define NAME_SHORT "BBLS2EE"
@@ -76,6 +76,8 @@ typedef struct s_level
 	t_data		data;
 	t_path		texture;
 	t_player	player;
+	t_vector	*collision_map;
+	int			nb_col;
 	char		*map;
 	char		**map_matrix;
 	int			key[4];
@@ -100,19 +102,26 @@ void		print_pos(char *title, t_vector v);
 /*BUILD				*/
 int			build_matrix(t_level *lvl);
 void		start_level(t_level *lvl, char *path);
+void		add_collision(t_level *l, t_vector pos, int nb_col);
 
 /*MOVEMENTS			*/
 int			int_to_dir(int	key);
-char		move_id(t_vector m_pos, char **map_matrix, char dir);
-void		move_draw(t_level *lvl, char dir, char id);
+t_vector	collision(t_level *l, t_vector pos, t_vector edge);
 t_vector	pixel_to_matrix(t_vector pos);
+void		player_process(t_level *l);
 
 /*DRAW				*/
 int			draw_player(t_level *l);
 void		draw_level(t_level *lvl);
+void		draw_screen(t_level *l);
 
 /*PHYSICS			*/
 int			physics_process(t_level *l);
+void		move_player(t_level *l);
+
+/*UTILS				*/
+void		set_vector(t_vector *v, int x, int y);
+int			vector_collide(t_vector v1, t_vector v2, int width);
 
 /*
 MENU

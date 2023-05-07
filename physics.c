@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:33:21 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/06 03:24:56 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/07 02:32:52 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,45 @@
 
 void	friction(t_level *l)
 {
-	if (l->player.vel.x > 0)
-		l->player.vel.x -= 1;
-	if (l->player.vel.y > 0)
-		l->player.vel.y -= 1;
+	static int	speed;
+
+	if (speed == 2)
+	{
+		speed = 0;
+		if (l->player.vel.x > 0)
+			l->player.vel.x -= 1;
+		if (l->player.vel.y > 0)
+			l->player.vel.y -= 1;
+		if (l->player.vel.x < 0)
+			l->player.vel.x += 1;
+		if (l->player.vel.y < 0)
+			l->player.vel.y += 1;
+		player_process(l);
+	}
+	move_player(l);
+	speed++;
+}
+
+void	move_player(t_level *l)
+{
+	t_vector	new_pos;
+	t_vector	edge;
+	t_vector	col;
+
+	new_pos.x = l->player.pos.x + l->player.vel.x;
+	new_pos.y = l->player.pos.y + l->player.vel.y;
+	edge.x = l->data.size.x * l->texture.width;
+	edge.y = l->data.size.y * l->texture.width;
+	col = collision(l, new_pos, edge);
+	if (col.x == 0)
+		l->player.pos.x += l->player.vel.x;
+	if (col.y == 0)
+		l->player.pos.y += l->player.vel.y;
 }
 
 int	physics_process(t_level *l)
 {
 	friction(l);
-	draw_level(l);
-	draw_player(l);
+	draw_screen(l);
 	return (0);
 }

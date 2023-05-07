@@ -24,18 +24,18 @@ void	init_level(t_level *level)
 	level->data.wall = '1';
 	level->data.exit = 'E';
 	level->data.player = 'P';
-	level->data.size.x = -1;
-	level->data.size.y = 1;
+	set_vector(&level->data.size, -1, 1);
 	level->data.coins_max = 0;
 	level->player.coins = 0;
-	level->player.vel.x = 0;
-	level->player.vel.y = 0;
+	set_vector(&level->player.vel, -1, 0);
 	level->player.pos.x = -1;
+	level->nb_col = 0;
+	level->collision_map = malloc(sizeof(t_vector));
+	level->texture.player = mlx_xpm_file_to_image(level->params.mlx, "./assets/player_frames/player1.xpm", &img_width, &img_height);
 	level->texture.collect = mlx_xpm_file_to_image(level->params.mlx, "./assets/coins.xpm", &img_width, &img_height);
 	level->texture.empty = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor.xpm", &img_width, &img_height);
 	level->texture.wall = mlx_xpm_file_to_image(level->params.mlx, "./assets/wall.xpm", &img_width, &img_height);
 	level->texture.exit = mlx_xpm_file_to_image(level->params.mlx, "./assets/enemy.xpm", &img_width, &img_height);
-	level->texture.player = mlx_xpm_file_to_image(level->params.mlx, "./assets/player.xpm", &img_width, &img_height);
 	level->texture.width = 32;
 	info("Game initiated");
 }
