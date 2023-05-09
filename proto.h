@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include "mlx/mlx.h"
 
-# define NAME "BeachBall life simulator 2023 EXTREME edititon"
-# define NAME_SHORT "BBLS2EE"
+# define NAME "BeachBall in a park simulator 2023 XTREME EDITION"
+# define NAME_SHORT "BBIAPS"
 
 typedef struct s_vector
 {
@@ -128,6 +128,7 @@ void		set_vector(t_vector *v, int x, int y);
 int			vector_collide(t_vector v1, t_vector v2, int width);
 int			invert(int d);
 void		erase_coins(t_level *l, t_vector pos_erase);
+t_vector 	vector(int x, int y);
 
 /*MATRIX			*/
 void		add_collision(t_level *l, t_vector pos, int nb_col);
