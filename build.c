@@ -56,6 +56,8 @@ void	start_level(t_level *lvl, char *path)
 	info("Building matrix...");
 	build_matrix(lvl);
 	mlx_string_put(lvl->params.mlx, lvl->params.mlx_win, 10, 20, 0xFFFFFF, path);
-	mlx_hook(lvl->params.mlx_win, 2, 0, key_press, &lvl);
-	mlx_hook(lvl->params.mlx_win, 3, 0, key_release, &lvl);
+	mlx_hook(lvl->params.mlx_win, 2, 0, key_press, lvl);
+	mlx_hook(lvl->params.mlx_win, 3, 0, key_release, lvl);
+	mlx_loop_hook(lvl->params.mlx, physics_process, lvl);
+	mlx_loop(lvl->params.mlx);
 }

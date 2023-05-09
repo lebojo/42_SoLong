@@ -62,8 +62,4 @@ int	main(int argc, char **argv)
 		error("But ok i'll start the menu.");
 		draw_menu(&level);
 	}
-	mlx_hook(level.params.mlx_win, 2, 0, key_press, &level);
-	mlx_hook(level.params.mlx_win, 3, 0, key_release, &level);
-	mlx_loop_hook(level.params.mlx, physics_process, &level);
-	mlx_loop(level.params.mlx);
 }
