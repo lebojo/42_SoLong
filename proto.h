@@ -43,7 +43,7 @@ typedef struct s_path
 {
 	char	*empty;
 	char	*wall;
-	char	*player;
+	char	*player[4];
 	char	*exit;
 	char	*collect;
 	int		width;
@@ -77,6 +77,8 @@ typedef struct s_level
 	t_path		texture;
 	t_player	player;
 	t_vector	*collision_map;
+	t_vector	*coins_map;
+	t_vector	exit;
 	int			nb_col;
 	char		*map;
 	char		**map_matrix;
@@ -107,8 +109,9 @@ void		add_collision(t_level *l, t_vector pos, int nb_col);
 /*MOVEMENTS			*/
 int			int_to_dir(int	key);
 t_vector	collision(t_level *l, t_vector pos, t_vector edge);
-t_vector	pixel_to_matrix(t_vector pos);
 void		player_process(t_level *l);
+void		collect_coins(t_level *l);
+void	exit_level(t_level *l);
 
 /*DRAW				*/
 int			draw_player(t_level *l);
@@ -122,6 +125,12 @@ void		move_player(t_level *l);
 /*UTILS				*/
 void		set_vector(t_vector *v, int x, int y);
 int			vector_collide(t_vector v1, t_vector v2, int width);
+int			invert(int d);
+void		erase_coins(t_level *l, t_vector pos_erase);
+
+/*MATRIX			*/
+void		add_collision(t_level *l, t_vector pos, int nb_col);
+void		add_coins(t_level *l, t_vector pos, int nb_coins);
 
 /*
 MENU

@@ -27,9 +27,11 @@ int	build_matrix(t_level *lvl)
 		if (cel == lvl->data.player)
 			set_vector(&lvl->player.pos, pos.x * lvl->texture.width, (pos.y + 1) * lvl->texture.width);
 		if (cel == lvl->data.wall && pos.x > 1 && pos.y > 1 && pos.x < lvl->data.size.x - 1 && pos.y < lvl->data.size.y - 1)
-		{
 			add_collision(lvl, pos, ++lvl->nb_col);
-		}
+		if (cel == lvl->data.collect)
+			add_coins(lvl, pos, ++lvl->data.coins_max);
+		if (cel == lvl->data.exit)
+			set_vector(&lvl->exit, pos.x * 32, (pos.y + 1) * 32);
 		if (cel != '\n')
 			pos.x += 1;
 		else
@@ -45,28 +47,9 @@ int	build_matrix(t_level *lvl)
 	return (0);
 }
 
-void	add_collision(t_level *l, t_vector pos, int nb_col)
-{
-	t_vector	*new_map;
-	int			i;
-
-	i = -1;
-	set_vector(&pos, pos.x * l->texture.width, (pos.y + 1) *l->texture.width);
-	new_map = malloc(sizeof(t_vector) * nb_col);
-	if (nb_col > 1)
-	{
-		while (++i < nb_col)
-			new_map[i] = l->collision_map[i];
-	free(l->collision_map);
-	}
-	new_map[0] = pos;
-	l->collision_map = new_map;
-}
-
 void	start_level(t_level *lvl, char *path)
 {
 	parse(path, lvl);
-	//ft_putstr_fd(lvl->map, 0);
 	lvl->params.mlx_win = mlx_new_window(lvl->params.mlx, lvl->data.size.x * lvl->texture.width, (lvl->data.size.y + 1) * lvl->texture.width, NAME);
 	lvl->map_matrix = malloc(sizeof(char *) * lvl->data.size.y);
 	lvl->map_matrix[0] = malloc(sizeof(char) * lvl->data.size.x);

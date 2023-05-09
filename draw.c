@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:15:19 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/07 03:37:56 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/09 02:41:43 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,19 @@
 int	draw_player(t_level *l)
 {
 	t_vector	pos;
+	static int	i;
+	static int	ii;
 
 	pos = l->player.pos;
-	mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->texture.player, pos.x, pos.y);
+	if (i >= 3)
+		i = 0;
+	if (ii == 5)
+	{
+		i++;
+		ii = 0;
+	}
+	ii++;
+	mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->texture.player[i], pos.x, pos.y);
 	return (0);
 }
 
@@ -44,23 +54,23 @@ void	draw_screen(t_level *l)
 
 void draw_level(t_level *lvl)
 {
+	t_vector	cursor;
 	t_vector	pos;
-	int			i;
 	int			cel;
 
-	i = 0;
-	pos.x = 0;
-	pos.y = lvl->texture.width;
-	while (lvl->map[i])
+	set_vector(&cursor, 0, 0);
+	set_vector(&pos, 0, lvl->texture.width);
+	while (cursor.y < lvl->data.size.y)
 	{
-		cel = draw_cell(lvl, lvl->map[i], lvl->params, pos);
-		if (cel != 0)
-			pos.x += lvl->texture.width;
-		else
+		cursor.x = 1;
+		pos.x = 0;
+		while (cursor.x <= lvl->data.size.x)
 		{
-			pos.x = 0;
-			pos.y += lvl->texture.width;
+			cel = draw_cell(lvl, lvl->map_matrix[cursor.y][cursor.x], lvl->params, pos);
+			pos.x += lvl->texture.width;
+			cursor.x++;
 		}
-		i++;
+		pos.y += lvl->texture.width;
+		cursor.y++;
 	}
 }

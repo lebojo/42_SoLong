@@ -31,7 +31,10 @@ void	init_level(t_level *level)
 	level->player.pos.x = -1;
 	level->nb_col = 0;
 	level->collision_map = malloc(sizeof(t_vector));
-	level->texture.player = mlx_xpm_file_to_image(level->params.mlx, "./assets/player_frames/player1.xpm", &img_width, &img_height);
+	level->texture.player[0] = mlx_xpm_file_to_image(level->params.mlx, "./assets/player_frames/player1.xpm", &img_width, &img_height);
+	level->texture.player[1] = mlx_xpm_file_to_image(level->params.mlx, "./assets/player_frames/player2.xpm", &img_width, &img_height);
+	level->texture.player[2] = mlx_xpm_file_to_image(level->params.mlx, "./assets/player_frames/player3.xpm", &img_width, &img_height);
+	level->texture.player[3] = mlx_xpm_file_to_image(level->params.mlx, "./assets/player_frames/player4.xpm", &img_width, &img_height);
 	level->texture.collect = mlx_xpm_file_to_image(level->params.mlx, "./assets/coins.xpm", &img_width, &img_height);
 	level->texture.empty = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor.xpm", &img_width, &img_height);
 	level->texture.wall = mlx_xpm_file_to_image(level->params.mlx, "./assets/wall.xpm", &img_width, &img_height);

@@ -12,14 +12,6 @@
 
 #include "proto.h"
 
-t_vector	pixel_to_matrix(t_vector pos)
-{
-	pos.x /= 32;
-	pos.y /= 32;
-	pos.y -= 1;
-	return (pos); 
-}
-
 int	int_to_dir(int	key) //1 = gauche, 2 = haut, 3 = droite, 4 = bas, 0 = pas reconnu
 {
 	if (key == 2 || key == 124
@@ -45,17 +37,57 @@ t_vector	collision(t_level *l, t_vector pos, t_vector edge)
 	int			i;
 
 	i = -1;
-	set_vector(&res, 0, 0);
+	set_vector(&res, 1, 1);
 	if (pos.x > edge.x - 54 || pos.x < 22)
-		res.x = 1;
+		l->player.vel.x *= -1;
 	if (pos.y < 54 || pos.y > edge.y - 22)
-		res.y = 1;
+		l->player.vel.y *= -1;
 	while (++i <= l->nb_col)
 	{
 		if (vector_collide(pos, l->collision_map[i], l->texture.width))
-			set_vector(&res, 1, 1);
+		{
+			l->player.vel.x *= -1;
+			l->player.vel.y *= -1;
+			break ;
+		}
 	}
 	return (res);
+}
+
+void	collect_coins(t_level *l)
+{
+	int	i;
+
+	i = -1;
+	while (++i <= l->data.coins_max)
+	{
+		if (vector_collide(l->player.pos, l->coins_map[i], l->texture.width))
+		{
+			l->player.coins++;
+			erase_coins(l, l->coins_map[i]);
+			set_vector(&l->coins_map[i], -1, -1);
+			print_score(l->player.coins, l->data.coins_max);
+			break ;
+		}
+	}
+}
+
+void	exit_level(t_level *l)
+{
+	if (vector_collide(l->player.pos, l->exit, l->texture.width))
+	{
+		if (l->player.coins >= l->data.coins_max)
+		{
+			info("You win!");
+			exit(0);
+		}
+		else
+		{
+			info("Ur 2 broke 2 die");
+			l->player.vel.x *= -1;
+			l->player.vel.y *= -1;
+		}
+	}
 }
 
 void	player_process(t_level *l)
