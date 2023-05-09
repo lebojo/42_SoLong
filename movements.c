@@ -12,7 +12,7 @@
 
 #include "proto.h"
 
-int	int_to_dir(int	key) //1 = gauche, 2 = haut, 3 = droite, 4 = bas, 0 = pas reconnu
+int	int_to_dir(int	key) //0 = gauche, 1 = haut, 2 = droite, 3 = bas, 4 = enter 0 = pas reconnu
 {
 	if (key == 2 || key == 124
 		|| key == 65363 || key == 100)
@@ -26,6 +26,8 @@ int	int_to_dir(int	key) //1 = gauche, 2 = haut, 3 = droite, 4 = bas, 0 = pas rec
 	else if (key == 1 || key == 125
 		|| key == 65364 || key == 115)
 		return (3);
+	else if (key == 36)
+		return (4);
 	else if (key == 53 || key == 65307)
 		exit(info("Game closed"));
 	return (0);

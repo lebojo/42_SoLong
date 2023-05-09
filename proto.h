@@ -82,7 +82,8 @@ typedef struct s_level
 	int			nb_col;
 	char		*map;
 	char		**map_matrix;
-	int			key[4];
+	int			key[5];
+	int			state; // 0 = menu, 1 = ig
 	t_params	params;
 }	t_level;
 
@@ -132,11 +133,16 @@ void		erase_coins(t_level *l, t_vector pos_erase);
 void		add_collision(t_level *l, t_vector pos, int nb_col);
 void		add_coins(t_level *l, t_vector pos, int nb_coins);
 
+/*KEY				*/
+int			key_press(int keycode, t_level *lvl);
+int			key_release(int keycode, t_level *lvl);
+
 /*
 MENU
 */
 
 /*START				*/
 void		draw_menu(t_level *lvl);
+void		menu_process(t_level *l);
 
 #endif

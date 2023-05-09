@@ -55,4 +55,7 @@ void	start_level(t_level *lvl, char *path)
 	lvl->map_matrix[0] = malloc(sizeof(char) * lvl->data.size.x);
 	info("Building matrix...");
 	build_matrix(lvl);
+	mlx_string_put(lvl->params.mlx, lvl->params.mlx_win, 10, 20, 0xFFFFFF, path);
+	mlx_hook(lvl->params.mlx_win, 2, 0, key_press, &lvl);
+	mlx_hook(lvl->params.mlx_win, 3, 0, key_release, &lvl);
 }

@@ -19,6 +19,7 @@ void	init_level(t_level *level)
 	int			img_width;
 	int			img_height;
 
+	level->state = 0;
 	level->data.collect = 'C';
 	level->data.empty = '0';
 	level->data.wall = '1';
@@ -43,18 +44,6 @@ void	init_level(t_level *level)
 	info("Game initiated");
 }
 
-int key_press(int keycode, t_level *lvl)
-{
-	lvl->key[int_to_dir(keycode)] = 1;
-	return (0);
-}
-
-int key_release(int keycode, t_level *lvl)
-{
-    lvl->key[int_to_dir(keycode)] = 0;
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_level		level;
@@ -63,6 +52,7 @@ int	main(int argc, char **argv)
 	init_level(&level);
 	if (argc >= 2)
 	{
+		level.state = 1;
 		info("Starting...");
 		start_level(&level, argv[1]);
 	}
@@ -73,7 +63,7 @@ int	main(int argc, char **argv)
 		draw_menu(&level);
 	}
 	mlx_hook(level.params.mlx_win, 2, 0, key_press, &level);
-    mlx_hook(level.params.mlx_win, 3, 0, key_release, &level);
+	mlx_hook(level.params.mlx_win, 3, 0, key_release, &level);
 	mlx_loop_hook(level.params.mlx, physics_process, &level);
 	mlx_loop(level.params.mlx);
 }

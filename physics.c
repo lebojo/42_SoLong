@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:33:21 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/09 03:23:07 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/09 03:55:13 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,14 @@ void	move_player(t_level *l)
 
 int	physics_process(t_level *l)
 {
-	friction(l);
-	draw_screen(l);
+	if (l->state == 1)
+	{
+		friction(l);
+		draw_screen(l);
+	}
+	else
+	{
+		menu_process(l);
+	}
 	return (0);
 }
