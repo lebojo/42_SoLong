@@ -40,6 +40,7 @@ void	init_level(t_level *level)
 	level->texture.empty = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor.xpm", &img_width, &img_height);
 	level->texture.wall = mlx_xpm_file_to_image(level->params.mlx, "./assets/wall.xpm", &img_width, &img_height);
 	level->texture.exit = mlx_xpm_file_to_image(level->params.mlx, "./assets/enemy.xpm", &img_width, &img_height);
+	level->texture.blck = mlx_xpm_file_to_image(level->params.mlx, "./assets/blck.xpm", &img_width, &img_height);
 	level->texture.width = 32;
 	info("Game initiated");
 }

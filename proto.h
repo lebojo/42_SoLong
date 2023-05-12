@@ -46,6 +46,7 @@ typedef struct s_path
 	char	*player[4];
 	char	*exit;
 	char	*collect;
+	char	*blck;
 	int		width;
 }	t_path;
 
@@ -116,7 +117,8 @@ void	exit_level(t_level *l);
 
 /*DRAW				*/
 int			draw_player(t_level *l);
-void		draw_level(t_level *lvl);
+void		draw_level_behind(t_level *lvl);
+void		draw_level_front(t_level *lvl);
 void		draw_screen(t_level *l);
 
 /*PHYSICS			*/
