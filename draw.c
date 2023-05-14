@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:15:19 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/14 16:09:14 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/14 17:40:33 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,20 @@
 int	draw_player(t_level *l)
 {
 	t_vector	pos;
-	static int	i;
-	static int	ii;
+	int			f;
 
 	pos = l->player.pos;
-	if (i >= 3)
-		i = 0;
-	if (ii == 5)
-	{
-		i++;
-		ii = 0;
-	}
-	ii++;
-	mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->texture.player[i], pos.x, pos.y);
+	f = l->texture.pf.nb;
+	mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->texture.player[f], pos.x, pos.y);
 	return (0);
 }
 
 int	draw_coins(t_level *l, t_params prm, t_vector pos)
 {
-	static int	speed;
-	static int	speed2;
+	int			f;
 
-	if (speed == 8)
-		speed = 0;
-	mlx_put_image_to_window(prm.mlx, prm.mlx_win, l->texture.coins[speed], pos.x, pos.y);
-	if (speed2++ >= 10)
-	{
-		speed2 = 0,
-		speed++;
-	}
+	f = l->texture.cf.nb;
+	mlx_put_image_to_window(prm.mlx, prm.mlx_win, l->texture.coins[f], pos.x, pos.y);
 	return (0);
 }
 
@@ -118,6 +103,7 @@ void draw_hud(t_level *l)
 
 void	draw_screen(t_level *l)
 {
+	animation_process(l);
 	draw_hud(l);
 	draw_level(l);
 	draw_player(l);

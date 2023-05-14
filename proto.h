@@ -28,6 +28,12 @@ typedef struct s_vector
 	int	y;
 }	t_vector;
 
+typedef struct s_range
+{
+	int	nb;
+	int	max;
+}	t_range;
+
 typedef struct s_data
 {
 	t_vector	size;
@@ -41,13 +47,15 @@ typedef struct s_data
 
 typedef struct s_path
 {
-	char	*empty;
-	char	*wall;
-	char	*player[4];
-	char	*exit;
-	char	*coins[8];
-	char	*blck;
-	int		width;
+	char		*empty;
+	char		*wall;
+	char		*player[4];
+	t_range		pf; //pf = player frame
+	char		*exit;
+	char		*coins[8];
+	t_range			cf; //cf = coins frame
+	char		*blck;
+	int			width;
 }	t_path;
 
 typedef struct s_params
@@ -141,6 +149,9 @@ void		add_coins(t_level *l, t_vector pos, int nb_coins);
 /*KEY				*/
 int			key_press(int keycode, t_level *lvl);
 int			key_release(int keycode, t_level *lvl);
+
+/*ANIMATION			*/
+void		animation_process(t_level *l);
 
 /*
 MENU

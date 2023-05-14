@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:22:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/14 14:32:47 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/14 17:51:36 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_player_frames(t_level *l)
 	l->texture.player[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player2.xpm", &img.x, &img.y);
 	l->texture.player[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player3.xpm", &img.x, &img.y);
 	l->texture.player[3] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player4.xpm", &img.x, &img.y);
+	l->texture.pf.nb = 0;
+	l->texture.pf.max = 3;
 }
 
 void	init_coins_frames(t_level *l)
@@ -34,6 +36,8 @@ void	init_coins_frames(t_level *l)
 	l->texture.coins[5] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_6.xpm", &img.x, &img.y);
 	l->texture.coins[6] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_7.xpm", &img.x, &img.y);
 	l->texture.coins[7] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_8.xpm", &img.x, &img.y);
+	l->texture.cf.nb = 0;
+	l->texture.cf.max = 7;
 }
 
 void	init_level(t_level *level)

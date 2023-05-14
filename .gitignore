@@ -1,5 +1,5 @@
 # Compiled source #
 ###################
-Makefile
 mlx/*
 *.o
+*.a
