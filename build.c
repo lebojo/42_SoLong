@@ -50,6 +50,8 @@ int	build_matrix(t_level *lvl)
 void	start_level(t_level *lvl, char *path)
 {
 	parse(path, lvl);
+	if (parse_validity(*lvl))
+		exit(error("Incorrect map!"));
 	lvl->params.mlx_win = mlx_new_window(lvl->params.mlx, lvl->data.size.x * lvl->texture.width, (lvl->data.size.y + 1) * lvl->texture.width, NAME);
 	lvl->map_matrix = malloc(sizeof(char *) * lvl->data.size.y);
 	lvl->map_matrix[0] = malloc(sizeof(char) * lvl->data.size.x);

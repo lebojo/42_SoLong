@@ -27,7 +27,7 @@ int info(char *str)
 	ft_putstr_fd("] \033[0m", 0);
 	ft_putstr_fd(str, 0);
 	ft_putchar_fd('\n', 0);
-	return(0);
+	return(1);
 }
 
 void	print_score(int min, int max)

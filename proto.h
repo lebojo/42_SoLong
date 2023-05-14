@@ -92,7 +92,7 @@ typedef struct s_level
 	char		*map;
 	char		**map_matrix;
 	int			key[5];
-	int			state; // 0 = menu, 1 = ig
+	int			state; // 0 = menu, 1 = niveau 1, etc..
 	t_params	params;
 }	t_level;
 

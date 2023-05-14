@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 	init_level(&level);
 	if (argc >= 2)
 	{
-		level.state = 1;
 		info("Starting...");
 		start_level(&level, argv[1]);
 	}

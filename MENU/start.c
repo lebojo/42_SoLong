@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:03:45 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/14 16:16:57 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/14 18:31:29 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	menu_process(t_level *l)
 			exit(0);
 		mlx_destroy_window(l->params.mlx, l->params.mlx_win);
 		reset_keys(l);
-		l->state = 1;
 		info("Starting...");
 		start_level(l, "map/default.ber");
 	}
