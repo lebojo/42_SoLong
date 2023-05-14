@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   physics.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:33:21 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/09 03:55:13 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:13:35 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,7 @@ void	move_player(t_level *l)
 
 int	physics_process(t_level *l)
 {
-	if (l->state == 1)
-	{
-		friction(l);
-		draw_screen(l);
-	}
-	else
-	{
-		menu_process(l);
-	}
+	friction(l);
+	draw_screen(l);
 	return (0);
 }

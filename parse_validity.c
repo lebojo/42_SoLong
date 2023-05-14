@@ -23,7 +23,7 @@ int	parse_validity(t_level lvl)
 	req.bool_player = 0;
 	while (lvl.map[++i])
 	{
-		if (lvl.map[i] != lvl.data.collect
+		if (lvl.map[i] != lvl.data.coins
 			&& lvl.map[i] != lvl.data.empty
 			&& lvl.map[i] != lvl.data.exit
 			&& lvl.map[i] != lvl.data.wall
@@ -33,9 +33,9 @@ int	parse_validity(t_level lvl)
 			req.bool_player == 1;
 		else if (lvl.map[i] == lvl.data.player && req.bool_player == 1)
 			return (1);
-		if (lvl.map[i] == lvl.data.collect && req.bool_coins == 0)
+		if (lvl.map[i] == lvl.data.coins && req.bool_coins == 0)
 			req.bool_coins == 1;
-		else if (lvl.map[i] == lvl.data.collect && req.bool_coins == 1)
+		else if (lvl.map[i] == lvl.data.coins && req.bool_coins == 1)
 			return (1);
 		if (lvl.map[i] == lvl.data.exit && req.bool_exit == 0)
 			req.bool_exit == 1;

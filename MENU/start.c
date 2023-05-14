@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:03:45 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/09 05:35:46 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:16:57 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void draw_bcgk(t_level *lvl, t_vector start, t_vector end)
 	draw_player(lvl);
 }
 
-void	menu_process(t_level *l)
+
+int	menu_process(t_level *l)
 {
 	if (l->key[4] == 1)
 	{
@@ -73,13 +74,14 @@ void	menu_process(t_level *l)
 	}
 	if (l->key[1] == 1 || l->key[3] == 1 )
 	{
-		draw_bcgk(l, vector(0, 0), vector(320, 320));
 		if (l->player.pos.y == 220)
 			l->player.pos.y = 180;
 		else
-			l->player.pos.y = 180;
+			l->player.pos.y = 220;
 		reset_keys(l);
 	}
+	draw_bcgk(l, vector(0, 0), vector(320, 320));
+	return (0);
 }
 
 void	draw_menu(t_level *lvl)
@@ -90,6 +92,6 @@ void	draw_menu(t_level *lvl)
 	draw_bcgk(lvl, vector(0, 0), vector(350, 350));
 	mlx_hook(lvl->params.mlx_win, 2, 0, key_press, lvl);
 	mlx_hook(lvl->params.mlx_win, 3, 0, key_release, lvl);
-	mlx_loop_hook(lvl->params.mlx, physics_process, lvl);
+	mlx_loop_hook(lvl->params.mlx, menu_process, lvl);
 	mlx_loop(lvl->params.mlx);
 }

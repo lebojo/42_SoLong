@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:15:19 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/13 00:03:47 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/14 16:09:14 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,60 @@ int	draw_player(t_level *l)
 	return (0);
 }
 
+int	draw_coins(t_level *l, t_params prm, t_vector pos)
+{
+	static int	speed;
+	static int	speed2;
+
+	if (speed == 8)
+		speed = 0;
+	mlx_put_image_to_window(prm.mlx, prm.mlx_win, l->texture.coins[speed], pos.x, pos.y);
+	if (speed2++ >= 10)
+	{
+		speed2 = 0,
+		speed++;
+	}
+	return (0);
+}
+
 int draw_cell(t_level *lvl, char c, t_params prm, t_vector pos)
 {
 	if (c == '\n')
 		return (0);
-	if (c == lvl->data.collect)
-		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.collect, pos.x, pos.y);
-	else if (c == lvl->data.empty || c == lvl->data.player)
-		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.empty, pos.x, pos.y);
+	mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.empty, pos.x, pos.y);
+	if (c == lvl->data.coins)
+		draw_coins(lvl, prm, pos);
 	else if (c == lvl->data.exit)
 		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.exit, pos.x, pos.y);
-	else if (c == lvl->data.wall)
+	else if (c == lvl->data.wall && pos.y - 1 < lvl->player.pos.y)
 		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.wall, pos.x, pos.y);
 	return (1);
 }
 
+void	draw_wall(t_level *l)
+{
+	t_vector	pos;
+	t_vector	cursor;
 
-void draw_level_behind(t_level *lvl)
+	set_vector(&cursor, l->player.pos.x / 32, l->player.pos.y / 32);
+	set_vector(&pos, cursor.x * 32, (cursor.y + 1) * 32);
+	while (cursor.y < l->data.size.y)
+	{
+		cursor.x = 1;
+		pos.x = 0;
+		while (cursor.x <= l->data.size.x)
+		{
+			if (l->map_matrix[cursor.y][cursor.x] == l->data.wall)
+				mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->texture.wall, pos.x, pos.y);
+			pos.x += l->texture.width;
+			cursor.x++;
+		}
+		pos.y += l->texture.width;
+		cursor.y++;
+	}
+}
+
+void draw_level(t_level *lvl)
 {
 	t_vector	pos;
 	t_vector	cursor;
@@ -55,7 +92,7 @@ void draw_level_behind(t_level *lvl)
 
 	set_vector(&cursor, 0, 0);
 	set_vector(&pos, 0, lvl->texture.width);
-	while (cursor.y < lvl->player.pos.y / 32)
+	while (cursor.y < lvl->data.size.y)
 	{
 		cursor.x = 1;
 		pos.x = 0;
@@ -70,29 +107,6 @@ void draw_level_behind(t_level *lvl)
 	}
 }
 
-void draw_level_front(t_level *lvl)
-{
-	t_vector	pos;
-	t_vector	cursor;
-	int			cel;
-
-	set_vector(&cursor, 0, lvl->data.size.y - 1);
-	set_vector(&pos, 0, lvl->data.size.y * 32);
-	while (cursor.y >= lvl->player.pos.y / 32)
-	{
-		cursor.x = 1;
-		pos.x = 0;
-		while (cursor.x <= lvl->data.size.x)
-		{
-			cel = draw_cell(lvl, lvl->map_matrix[cursor.y][cursor.x], lvl->params, pos);
-			pos.x += lvl->texture.width;
-			cursor.x++;
-		}
-		pos.y -= lvl->texture.width;
-		cursor.y--;
-	}
-}
-
 void draw_hud(t_level *l)
 {
 	int	i;
@@ -104,8 +118,8 @@ void draw_hud(t_level *l)
 
 void	draw_screen(t_level *l)
 {
-	draw_level_behind(l);
 	draw_hud(l);
+	draw_level(l);
 	draw_player(l);
-	draw_level_front(l);
+	draw_wall(l);
 }

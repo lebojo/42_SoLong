@@ -28,7 +28,7 @@ int	build_matrix(t_level *lvl)
 			set_vector(&lvl->player.pos, pos.x * lvl->texture.width, (pos.y + 1) * lvl->texture.width);
 		if (cel == lvl->data.wall && pos.x > 1 && pos.y > 1 && pos.x < lvl->data.size.x - 1 && pos.y < lvl->data.size.y - 1)
 			add_collision(lvl, pos, ++lvl->nb_col);
-		if (cel == lvl->data.collect)
+		if (cel == lvl->data.coins)
 			add_coins(lvl, pos, ++lvl->data.coins_max);
 		if (cel == lvl->data.exit)
 			set_vector(&lvl->exit, pos.x * 32, (pos.y + 1) * 32);

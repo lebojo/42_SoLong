@@ -36,7 +36,7 @@ typedef struct s_data
 	char		wall;
 	char		player;
 	char		exit;
-	char		collect;
+	char		coins;
 }	t_data;
 
 typedef struct s_path
@@ -45,7 +45,7 @@ typedef struct s_path
 	char	*wall;
 	char	*player[4];
 	char	*exit;
-	char	*collect;
+	char	*coins[8];
 	char	*blck;
 	int		width;
 }	t_path;
@@ -88,8 +88,10 @@ typedef struct s_level
 	t_params	params;
 }	t_level;
 
-/*MAIN.C			*/
+/*INIT.C			*/
 void		init_level(t_level *level);
+void		init_player_frames(t_level *l);
+void		init_coins_frames(t_level *l);
 
 /*PARSE.C			*/
 void		parse(char *file_path, t_level *lvl);
@@ -113,13 +115,13 @@ int			int_to_dir(int	key);
 t_vector	collision(t_level *l, t_vector pos, t_vector edge);
 void		player_process(t_level *l);
 void		collect_coins(t_level *l);
-void	exit_level(t_level *l);
+void		exit_level(t_level *l);
 
 /*DRAW				*/
 int			draw_player(t_level *l);
-void		draw_level_behind(t_level *lvl);
-void		draw_level_front(t_level *lvl);
+void		draw_level(t_level *lvl);
 void		draw_screen(t_level *l);
+void 		draw_bcgk(t_level *lvl, t_vector start, t_vector end);
 
 /*PHYSICS			*/
 int			physics_process(t_level *l);
@@ -146,6 +148,6 @@ MENU
 
 /*START				*/
 void		draw_menu(t_level *lvl);
-void		menu_process(t_level *l);
+int			menu_process(t_level *l);
 
 #endif
