@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+         #
+#    By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/21 21:58:57 by jchapell          #+#    #+#              #
-#    Updated: 2023/05/16 05:45:45 by lebojo           ###   ########.fr        #
+#    Updated: 2023/05/16 20:44:02 by jchapell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= so_long
 LIBFT		= libft/libft.a
 MINILIB		= mlx/libmlx.a
-CFLAGS 		= -Wall -Wextra -Werror -Imlx
+CFLAGS 		=  -Imlx
 CC			= cc
 SRC_PATH	= ./
 
@@ -34,7 +34,7 @@ $(MINILIB):
 			make -C mlx
 
 %.o: %.c
-			$(CC) -g -Wall -Wextra -Werror -Imlx -c $< -o $@
+			$(CC) -g -Imlx -c $< -o $@
 
 $(NAME): $(OBJ)
 			$(CC) $(OBJ) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)

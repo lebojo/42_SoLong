@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 00:33:58 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/09 03:06:04 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:17:12 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	add_coins(t_level *l, t_vector pos, int nb_coins)
 	if (nb_coins > 1)
 	{
 		i = -1;
-		while (++i < nb_coins)
+		while (++i < nb_coins - 1)
 			new_map[i] = l->coins_map[i];
 	free(l->coins_map);
 	}

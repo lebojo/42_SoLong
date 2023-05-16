@@ -57,7 +57,7 @@ void	start_level(t_level *lvl, char *path)
 	lvl->map_matrix[0] = malloc(sizeof(char) * lvl->data.size.x);
 	info("Building matrix...");
 	build_matrix(lvl);
-	if (!can_collect_coins(lvl))
+	if (can_collect_coins(lvl) == 0)
 		exit(error("Coin(s) can't be collected"));
 	lvl->name = lvl_name_extractor(path);
 	mlx_hook(lvl->params.mlx_win, 2, 0, key_press, lvl);
