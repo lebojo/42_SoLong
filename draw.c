@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:15:19 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/14 17:40:33 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/16 06:34:35 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void draw_hud(t_level *l)
 void	draw_screen(t_level *l)
 {
 	animation_process(l);
-	draw_hud(l);
 	draw_level(l);
 	draw_player(l);
 	draw_wall(l);

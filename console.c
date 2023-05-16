@@ -17,7 +17,7 @@ int error(char *str)
 	ft_putstr_fd("\033[0;31m[ERROR] \033[0m", 0);
 	ft_putstr_fd(str, 0);
 	ft_putchar_fd('\n', 0);
-	return (0);
+	return (1);
 }
 
 int info(char *str)

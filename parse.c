@@ -40,6 +40,8 @@ void	parse(char *file_path, t_level *lvl)
 	if (file == -1)
 		return ;
 	info("Parsing map...");
+	if (check_ext(file_path, ".ber") == 0)
+		exit(error("A map <.ber> expected"));
 	while (read(file, &buffer, sizeof(char)) != 0)
 	{
 		lvl->map[i++] = buffer;

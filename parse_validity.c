@@ -34,7 +34,8 @@ int	parse_validity(t_level lvl)
 {
 	int				i;
 	t_vector		pos;
-	t_requierements	req; 
+	t_requierements	req;
+	int			**visited;
 
 	i = -1;
 	req.bool_coins = 0;
@@ -42,32 +43,40 @@ int	parse_validity(t_level lvl)
 	req.bool_player = 0;
 	set_vector(&pos, 0, 0);
 	info("Verifing map...");
+	lvl.map_matrix = malloc(sizeof(char *) * lvl.data.size.y);
+	lvl.map_matrix[0] = malloc(sizeof(char) * lvl.data.size.x);
+	visited = malloc(sizeof(int *) * lvl.data.size.y);
+	visited[0] = malloc(sizeof(int) * lvl.data.size.x);
 	while (lvl.map[++i])
 	{
 		if (lvl.map[i] == '\n')
 		{
-			i++;
 			if (pos.x > lvl.data.size.x || pos.y > lvl.data.size.y)
-				return (1);
+				return (error("Line size"));
 			pos.x = 0;
 			pos.y++;
+			lvl.map_matrix[pos.y] = malloc(sizeof(char) * (lvl.data.size.x + 1));
+			visited[pos.y] = malloc(sizeof(int) * (lvl.data.size.x + 1));
+			continue ;
 		}
 		if (check_cell_exist(lvl.data, lvl.map[i]) == 1)
-			return (info("Cel don't exist"));
+			return (error("Cell"));
 		if (lvl.map[i] == lvl.data.player && req.bool_player == 0)
 			req.bool_player = 1;
 		else if (lvl.map[i] == lvl.data.player && req.bool_player == 1)
-			return (info("2 players"));
+			return (error("2 players"));
 		if (lvl.map[i] == lvl.data.coins && req.bool_coins == 0)
 			req.bool_coins = 1;
 		if (lvl.map[i] == lvl.data.exit && req.bool_exit == 0)
 			req.bool_exit = 1;
 		else if (lvl.map[i] == lvl.data.exit && req.bool_exit == 1)
-			return (info("2 exits"));
+			return (error("2 exits"));
+		lvl.map_matrix[pos.y][pos.x] = lvl.map[i];
+		visited[pos.y][pos.x] = 0;
 		pos.x++;
 	}
 	if (check_req(req) == 1)
-		return (1);
+		return (error("Map not complete"));
 	info("Map ok!");
 	return (0);
 }

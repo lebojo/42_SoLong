@@ -66,6 +66,7 @@ void	collect_coins(t_level *l)
 		if (vector_collide(l->player.pos, l->coins_map[i], l->texture.width))
 		{
 			l->player.coins++;
+			hud_info(l, add_str("Score: ", score_to_str(l)));
 			erase_coins(l, l->coins_map[i]);
 			set_vector(&l->coins_map[i], -1, -1);
 			print_score(l->player.coins, l->data.coins_max);
@@ -86,6 +87,7 @@ void	exit_level(t_level *l)
 		else
 		{
 			info("Ur 2 broke 2 die");
+			hud_info(l, add_str(add_str("Score: ", score_to_str(l)), " - Ur 2 broke 2 die"));
 			l->player.vel.x *= -1;
 			l->player.vel.y *= -1;
 		}

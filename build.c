@@ -26,7 +26,7 @@ int	build_matrix(t_level *lvl)
 		cel = lvl->map[i];
 		if (cel == lvl->data.player)
 			set_vector(&lvl->player.pos, pos.x * lvl->texture.width, (pos.y + 1) * lvl->texture.width);
-		if (cel == lvl->data.wall && pos.x > 1 && pos.y > 1 && pos.x < lvl->data.size.x - 1 && pos.y < lvl->data.size.y - 1)
+		if (cel == lvl->data.wall && pos.x >= 1 && pos.y >= 1 && pos.x < lvl->data.size.x - 1 && pos.y < lvl->data.size.y - 1)
 			add_collision(lvl, pos, ++lvl->nb_col);
 		if (cel == lvl->data.coins)
 			add_coins(lvl, pos, ++lvl->data.coins_max);
@@ -57,7 +57,9 @@ void	start_level(t_level *lvl, char *path)
 	lvl->map_matrix[0] = malloc(sizeof(char) * lvl->data.size.x);
 	info("Building matrix...");
 	build_matrix(lvl);
-	mlx_string_put(lvl->params.mlx, lvl->params.mlx_win, 10, 20, 0xFFFFFF, path);
+	if (!can_collect_coins(lvl))
+		exit(error("Coin(s) can't be collected"));
+	lvl->name = lvl_name_extractor(path);
 	mlx_hook(lvl->params.mlx_win, 2, 0, key_press, lvl);
 	mlx_hook(lvl->params.mlx_win, 3, 0, key_release, lvl);
 	mlx_loop_hook(lvl->params.mlx, physics_process, lvl);
