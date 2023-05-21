@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:44:23 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/16 06:40:45 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/21 22:22:36 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void	hud_info(t_level *l, char *s)
 	draw_hud(l);
 	mlx_string_put(l->params.mlx, l->params.mlx_win, 10, 21, 0xFFFFFF, add_str("level: ", l->name));
 	margin = (ft_strlen(l->name) + 7) * 10;
-	mlx_string_put(l->params.mlx, l->params.mlx_win, margin, 21, 0xFFFFFF, s);
+	mlx_string_put(l->params.mlx, l->params.mlx_win, margin, 21, 0xFFFFFF, add_str(add_str(s, " - Time: "), ft_itoa(l->time)));
 }

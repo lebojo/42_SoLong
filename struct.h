@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:42:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/21 18:07:12 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/21 22:09:55 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,11 @@ typedef struct s_level
 	char		*map;
 	char		**map_matrix;
 	int			key[5];
-	int			state; // 0 = menu, 1 = niveau 1, etc..
+	int			time;
 	char		*name;
 	t_vector	ls_pos[10];
 	char		*ls_09[10];
+	char		*ls_09_dark[10];
 	t_params	params;
 }	t_level;
 

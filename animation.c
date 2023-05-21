@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:36:58 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/16 18:01:42 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/21 22:14:28 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,9 @@ void	anim_coins(t_level *l)
 
 void	animation_process(t_level *l)
 {
-	static	int	div;
-	
-	if (div >= 60)
-		div = 0;
-	if (div % 4 == 0)
+	if (l->time % 3 == 0)
 		anim_coins(l);
-	if (div % 5 == 0)
+	if (l->time % 5 == 0)
 		anim_player(l);
-	div++;
+	l->time++;
 }

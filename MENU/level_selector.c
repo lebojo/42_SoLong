@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:35:06 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/21 18:41:45 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/21 22:25:41 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ void	draw_menu_level(t_level *l, t_vector *p)
 
 	i = -1;
 	while (++i < 9)
-		mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->ls_09[i + 1], p[i].x, p[i].y);
+	{
+		if (i < l->player.max_level)
+			mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->ls_09[i + 1], p[i].x, p[i].y);
+		else
+			mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->ls_09_dark[i + 1], p[i].x, p[i].y);
+	}
 }
 
 void	player_position(t_level *l)
@@ -36,9 +41,9 @@ void	player_position(t_level *l)
 	}
 	if (l->key[1] == 1)
 	{
-		if (pp == 0 || pp == 1 || pp == 2)
+		if ((pp == 0 || pp == 1 || pp == 2) && pp + 6 <= l->player.max_level)
 			pp += 6;
-		else
+		else if (!(pp == 0 || pp == 1 || pp == 2))
 			pp -= 3;
 		reset_keys(l);
 	}
@@ -52,9 +57,9 @@ void	player_position(t_level *l)
 	}
 	if (l->key[3] == 1)
 	{
-		if (pp == 6 || pp == 7 || pp == 8)
+		if ((pp == 6 || pp == 7 || pp == 8) && pp - 6 <= l->player.max_level)
 			pp -= 6;
-		else
+		else if (pp + 3 <= l->player.max_level)
 			pp += 3;
 		reset_keys(l);
 	}
@@ -63,12 +68,28 @@ void	player_position(t_level *l)
 	l->player.ls_position = pp;
 }
 
+void	launch_level(t_level *l)
+{
+	char	*path;
+
+	if (l->key[4] == 1)
+	{
+		path = add_str("map/", ft_itoa(l->player.ls_position + 1));
+		mlx_destroy_window(l->params.mlx, l->params.mlx_win);
+		reset_keys(l);
+		info(add_str("Starting level ", ft_itoa(l->player.ls_position)));
+		start_level(l, add_str(path, ".ber"));
+	}
+}
+
 int	level_selector_process(t_level *l)
 {
 	draw_bcgk(l, vector(0, 0), vector(350, 350));
+	mlx_string_put(l->params.mlx, l->params.mlx_win, 10, 21, 0xFFFFFF, add_str("Actual time: ", ft_itoa(l->time)));
 	draw_menu_level(l, l->ls_pos);
 	player_position(l);
 	draw_player(l);
+	launch_level(l);
 	return (0);
 }
 

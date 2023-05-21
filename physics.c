@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:33:21 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/14 16:13:35 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/21 22:23:06 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int	physics_process(t_level *l)
 {
 	friction(l);
 	draw_screen(l);
+	hud_info(l, add_str("Coins: ", score_to_str(l)));
 	return (0);
 }

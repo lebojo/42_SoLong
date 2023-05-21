@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:22:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/21 18:33:07 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/21 22:10:52 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_level(t_level *level)
 	int			img_width;
 	int			img_height;
 
-	level->state = 0;
+	level->time = 0;
 	level->data.coins = 'C';
 	level->data.empty = '0';
 	level->data.wall = '1';
@@ -54,7 +54,7 @@ void	init_level(t_level *level)
 	set_vector(&level->data.size, -1, 1);
 	level->data.coins_max = 0;
 	level->player.coins = 0;
-	set_vector(&level->player.vel, -1, 0);
+	set_vector(&level->player.vel, 0, 0);
 	level->player.pos.x = -1;
 	level->player.ls_position = 0;
 	level->player.max_level = 1;
@@ -94,4 +94,14 @@ void	init_ls(t_level *l)
 	l->ls_09[7] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n7.xpm", &img.x, &img.y);
 	l->ls_09[8] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n8.xpm", &img.x, &img.y);
 	l->ls_09[9] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n9.xpm", &img.x, &img.y);
+	l->ls_09_dark[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n0.xpm", &img.x, &img.y);
+	l->ls_09_dark[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n1.xpm", &img.x, &img.y);
+	l->ls_09_dark[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n2.xpm", &img.x, &img.y);
+	l->ls_09_dark[3] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n3.xpm", &img.x, &img.y);
+	l->ls_09_dark[4] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n4.xpm", &img.x, &img.y);
+	l->ls_09_dark[5] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n5.xpm", &img.x, &img.y);
+	l->ls_09_dark[6] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n6.xpm", &img.x, &img.y);
+	l->ls_09_dark[7] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n7.xpm", &img.x, &img.y);
+	l->ls_09_dark[8] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n8.xpm", &img.x, &img.y);
+	l->ls_09_dark[9] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n9.xpm", &img.x, &img.y);
 }

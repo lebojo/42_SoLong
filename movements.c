@@ -66,7 +66,6 @@ void	collect_coins(t_level *l)
 		if (vector_collide(l->player.pos, l->coins_map[i], l->texture.width))
 		{
 			l->player.coins++;
-			hud_info(l, add_str("Score: ", score_to_str(l)));
 			erase_coins(l, l->coins_map[i]);
 			set_vector(&l->coins_map[i], -1, -1);
 			print_score(l->player.coins, l->data.coins_max);
@@ -81,8 +80,19 @@ void	exit_level(t_level *l)
 	{
 		if (l->player.coins >= l->data.coins_max)
 		{
-			info("You win!");
-			exit(0);
+			info(add_str("You win level ", ft_itoa(l->player.ls_position)));
+			mlx_destroy_window(l->params.mlx, l->params.mlx_win);
+			free(l->map);
+			free(l->map_matrix);
+			free(l->coins_map);
+			free(l->name);
+			set_vector(&l->data.size, -1, 1);
+			l->data.coins_max = 0;
+			l->player.coins = 0;
+			l->nb_col = 0;
+			if (l->player.ls_position + 1 == l->player.max_level)
+				l->player.max_level++;
+			start_menu(l);
 		}
 		else
 		{
