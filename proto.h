@@ -27,6 +27,7 @@
 void		init_level(t_level *level);
 void		init_player_frames(t_level *l);
 void		init_coins_frames(t_level *l);
+void		init_ls(t_level *l);
 
 /*PARSE.C			*/
 void		parse(char *file_path, t_level *lvl);
@@ -97,5 +98,9 @@ MENU
 /*START				*/
 void		draw_menu(t_level *lvl);
 int			menu_process(t_level *l);
+void		reset_keys(t_level *lvl);
+
+/*LEVEL_SELECTOR	*/
+void		start_menu(t_level *l);
 
 #endif

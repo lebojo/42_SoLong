@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+         #
+#    By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/21 21:58:57 by jchapell          #+#    #+#              #
-#    Updated: 2023/05/16 20:44:02 by jchapell         ###   ########.fr        #
+#    Updated: 2023/05/21 17:14:14 by lebojo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRC_PATH	= ./
 
 SRC 		= 	main.c parse.c console.c build.c movements.c \
 				MENU/start.c key.c matrix.c utils.c physics.c draw.c \
-				init.c animation.c parse_validity.c map_validity.c hud.c
+				init.c animation.c parse_validity.c map_validity.c hud.c \
+				MENU/level_selector.c
 
 SRCS = $(addprefix $(SRC_PATH),$(SRC))
 OBJS = ${SRCS:.c=.o}

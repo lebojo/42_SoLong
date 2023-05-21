@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validity.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:41:39 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/16 22:02:12 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:22:37 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int coin_check(t_vector pos, t_vector max, char **map)
 {
     if (map[pos.y][pos.x] == 'P')
-        return 2;
+        return (2);
     if (pos.y > max.y || pos.x > max.x || pos.y < 1 || pos.x < 1 || map[pos.y][pos.x] == '1')
-        return 0;
+        return (0);
 
     if (map[pos.y][pos.x] == '0' || map[pos.y][pos.x] == 'C')
     {
@@ -27,10 +27,10 @@ int coin_check(t_vector pos, t_vector max, char **map)
             coin_check(vector(pos.x - 1, pos.y), max, map) == 2 ||
             coin_check(vector(pos.x, pos.y - 1), max, map) == 2)
         {
-            return 2;
+            return (2);
         }
     }
-    return 0;
+    return (0);
 }
 
 char	**map_extract(t_level *l)

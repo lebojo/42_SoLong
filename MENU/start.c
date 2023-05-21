@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:03:45 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/14 18:31:29 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/21 17:31:24 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void draw_bcgk(t_level *lvl, t_vector start, t_vector end)
 		}
 		pos.x += lvl->texture.width;
 	}
-	draw_but(lvl);
-	draw_player(lvl);
 }
 
 
@@ -69,7 +67,7 @@ int	menu_process(t_level *l)
 		mlx_destroy_window(l->params.mlx, l->params.mlx_win);
 		reset_keys(l);
 		info("Starting...");
-		start_level(l, "map/default.ber");
+		start_menu(l);
 	}
 	if (l->key[1] == 1 || l->key[3] == 1 )
 	{
@@ -80,6 +78,8 @@ int	menu_process(t_level *l)
 		reset_keys(l);
 	}
 	draw_bcgk(l, vector(0, 0), vector(320, 320));
+	draw_but(l);
+	draw_player(l);
 	return (0);
 }
 
@@ -89,6 +89,8 @@ void	draw_menu(t_level *lvl)
 	lvl->player.pos.x = 110;
 	lvl->params.mlx_win = mlx_new_window(lvl->params.mlx, 350, 350, NAME);
 	draw_bcgk(lvl, vector(0, 0), vector(350, 350));
+	draw_but(lvl);
+	draw_player(lvl);
 	mlx_hook(lvl->params.mlx_win, 2, 0, key_press, lvl);
 	mlx_hook(lvl->params.mlx_win, 3, 0, key_release, lvl);
 	mlx_loop_hook(lvl->params.mlx, menu_process, lvl);

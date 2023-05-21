@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:22:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/16 18:00:18 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/21 18:33:07 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	init_level(t_level *level)
 	level->player.coins = 0;
 	set_vector(&level->player.vel, -1, 0);
 	level->player.pos.x = -1;
+	level->player.ls_position = 0;
+	level->player.max_level = 1;
 	level->nb_col = 0;
 	level->collision_map = malloc(sizeof(t_vector));
 	init_player_frames(level);
@@ -66,4 +68,30 @@ void	init_level(t_level *level)
 	level->texture.blck = mlx_xpm_file_to_image(level->params.mlx, "./assets/blck.xpm", &img_width, &img_height);
 	level->texture.width = 32;
 	info("Game initiated");
+}
+
+void	init_ls(t_level *l)
+{
+	t_vector	img;
+
+	l->ls_pos[0] = vector(80, 100);
+	l->ls_pos[1] = vector(160, 100);
+	l->ls_pos[2] = vector(240, 100);
+	l->ls_pos[3] = vector(80, 150);
+	l->ls_pos[4] = vector(160, 150);
+	l->ls_pos[5] = vector(240, 150);
+	l->ls_pos[6] = vector(80, 200);
+	l->ls_pos[7] = vector(160, 200);
+	l->ls_pos[8] = vector(240, 200);
+	l->ls_pos[9] = vector(160, 400);
+	l->ls_09[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n0.xpm", &img.x, &img.y);
+	l->ls_09[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n1.xpm", &img.x, &img.y);
+	l->ls_09[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n2.xpm", &img.x, &img.y);
+	l->ls_09[3] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n3.xpm", &img.x, &img.y);
+	l->ls_09[4] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n4.xpm", &img.x, &img.y);
+	l->ls_09[5] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n5.xpm", &img.x, &img.y);
+	l->ls_09[6] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n6.xpm", &img.x, &img.y);
+	l->ls_09[7] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n7.xpm", &img.x, &img.y);
+	l->ls_09[8] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n8.xpm", &img.x, &img.y);
+	l->ls_09[9] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n9.xpm", &img.x, &img.y);
 }
