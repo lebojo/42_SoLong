@@ -59,6 +59,7 @@ void		draw_level(t_level *lvl);
 void		draw_screen(t_level *l);
 void 		draw_bcgk(t_level *lvl, t_vector start, t_vector end);
 void 		draw_hud(t_level *l);
+void		draw_around_player(t_level *l);
 
 /*PHYSICS			*/
 int			physics_process(t_level *l);
@@ -72,6 +73,7 @@ t_vector 	vector(int x, int y);
 char		*add_str(char *s1, char *s2);
 char		*lvl_name_extractor(char *s);
 int			check_ext(char *s, char *ext);
+int			near_32(int num);
 
 /*MATRIX			*/
 void		add_collision(t_level *l, t_vector pos, int nb_col);

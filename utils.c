@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:34:12 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/16 06:38:37 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/22 00:47:45 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,19 @@ int	check_ext(char *s, char *ext)
 		if (end_ext == 0)
 			return (1);
 	return (0);
+}
+
+int	near_32(int num)
+{
+	int quotient = num / 32;
+	int multiple = quotient * 32;
+
+	int lower_multiple = multiple;
+	int upper_multiple = multiple + 32;
+
+	if (num - lower_multiple < upper_multiple - num) {
+		return lower_multiple;
+	} else {
+		return upper_multiple;
+	}
 }
