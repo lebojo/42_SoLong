@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:15:19 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/22 01:10:43 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/25 15:40:08 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,36 +92,6 @@ void draw_level(t_level *lvl)
 	}
 }
 
-void	draw_around_player(t_level *l)
-{
-	t_vector	pos;
-	t_vector	cursor;
-	t_vector	pp; // = player pos
-	int			i;
-
-	pp = l->player.pos;
-	set_vector(&cursor, pp.x / 32, (pp.y - 32) / 32);
-	set_vector(&pos, near_32(pp.x - 32), near_32(pp.y - 32));
-	i = 0;
-	while (i < 9)
-	{
-		draw_cell(l, l->map_matrix[cursor.y][cursor.x], l->params, pos);
-		if (i == 2 || i == 5)
-		{
-			cursor.x = pp.x / 32;
-			pos.x = near_32(pp.x - 32);
-			pos.y += 32;
-			cursor.y++;
-		}
-		else
-		{
-			cursor.x++;
-			pos.x += 32;
-		}
-		i++;
-	}
-}
-
 void draw_hud(t_level *l)
 {
 	int	i;
@@ -134,8 +104,7 @@ void draw_hud(t_level *l)
 void	draw_screen(t_level *l)
 {
 	animation_process(l);
-	//draw_level(l);
-	draw_around_player(l);
+	draw_level(l);
 	draw_player(l);
 	draw_wall(l);
 }

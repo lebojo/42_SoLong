@@ -33,27 +33,28 @@ int	int_to_dir(int	key) //0 = gauche, 1 = haut, 2 = droite, 3 = bas, 4 = enter 0
 	return (0);
 }
 
-t_vector	collision(t_level *l, t_vector pos, t_vector edge)
+void	collision(t_level *l, t_vector pos, t_vector edge)
 {
-	t_vector	res;
-	int			i;
+	int	i;
+	int	col;
 
 	i = -1;
-	set_vector(&res, 1, 1);
 	if (pos.x > edge.x - 54 || pos.x < 22)
 		l->player.vel.x *= -1;
 	if (pos.y < 54 || pos.y > edge.y - 22)
 		l->player.vel.y *= -1;
 	while (++i <= l->nb_col)
 	{
-		if (vector_collide(pos, l->collision_map[i], l->texture.width))
+		col = vector_collide(pos, l->collision_map[i], l->texture.width);
+		if (col != 0)
 		{
-			l->player.vel.x *= -1;
-			l->player.vel.y *= -1;
+			if (col == 1)
+				l->player.vel.x *= -1;
+			else
+				l->player.vel.y *= -1;
 			break ;
 		}
 	}
-	return (res);
 }
 
 void	collect_coins(t_level *l)
@@ -63,7 +64,7 @@ void	collect_coins(t_level *l)
 	i = -1;
 	while (++i <= l->data.coins_max)
 	{
-		if (vector_collide(l->player.pos, l->coins_map[i], l->texture.width))
+		if (vector_collide(l->player.pos, l->coins_map[i], l->texture.width) != 0)
 		{
 			l->player.coins++;
 			erase_coins(l, l->coins_map[i]);
@@ -76,11 +77,13 @@ void	collect_coins(t_level *l)
 
 void	exit_level(t_level *l)
 {
-	if (vector_collide(l->player.pos, l->exit, l->texture.width))
+	int col = vector_collide(l->player.pos, l->exit, l->texture.width);
+
+	if (col != 0)
 	{
 		if (l->player.coins >= l->data.coins_max)
 		{
-			info(add_str("You win level ", ft_itoa(l->player.ls_position)));
+			info(add_str("You win level ", ft_itoa(l->player.ls_position + 1)));
 			mlx_destroy_window(l->params.mlx, l->params.mlx_win);
 			free(l->map);
 			free(l->map_matrix);
