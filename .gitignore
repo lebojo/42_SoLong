@@ -1,5 +1,5 @@
 # Compiled source #
 ###################
-mlx/*
 *.o
 *.a
+so_long
