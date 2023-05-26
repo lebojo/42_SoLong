@@ -48,7 +48,7 @@ void		add_collision(t_level *l, t_vector pos, int nb_col);
 
 /*MOVEMENTS			*/
 int			int_to_dir(int	key);
-t_vector	collision(t_level *l, t_vector pos, t_vector edge);
+void		collision(t_level *l, t_vector pos, t_vector edge);
 void		player_process(t_level *l);
 void		collect_coins(t_level *l);
 void		exit_level(t_level *l);
