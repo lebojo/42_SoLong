@@ -13,11 +13,11 @@
 #ifndef PROTO_H
 # define PROTO_H
 
-# include "libft/libft.h"
+# include "inc/libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "mlx/mlx.h"
+# include "inc/minilibx-linux/mlx.h"
 # include "struct.h"
 
 # define NAME "BeachBall in a park simulator 2023 XTREME EDITION"

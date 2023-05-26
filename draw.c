@@ -73,7 +73,6 @@ void draw_level(t_level *lvl)
 {
 	t_vector	pos;
 	t_vector	cursor;
-	int			cel;
 
 	set_vector(&cursor, 0, 0);
 	set_vector(&pos, 0, lvl->texture.width);
@@ -83,7 +82,7 @@ void draw_level(t_level *lvl)
 		pos.x = 0;
 		while (cursor.x <= lvl->data.size.x)
 		{
-			cel = draw_cell(lvl, lvl->map_matrix[cursor.y][cursor.x], lvl->params, pos);
+			draw_cell(lvl, lvl->map_matrix[cursor.y][cursor.x], lvl->params, pos);
 			pos.x += lvl->texture.width;
 			cursor.x++;
 		}
@@ -134,8 +133,7 @@ void draw_hud(t_level *l)
 void	draw_screen(t_level *l)
 {
 	animation_process(l);
-	//draw_level(l);
-	draw_around_player(l);
+	draw_level(l);
 	draw_player(l);
 	draw_wall(l);
 }

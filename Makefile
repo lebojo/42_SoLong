@@ -10,45 +10,81 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= so_long
-LIBFT		= libft/libft.a
-MINILIB		= mlx/libmlx.a
-CFLAGS 		=  -Imlx
-CC			= cc
-SRC_PATH	= ./
+# Executable Name
+ENAME	=	so_long
+NAME	=	so_long.a
+CFLAGS	=	-Wall -Werror -Wextra
+AR		=	ar -rsc
+FILES	=	main.c parse.c console.c build.c movements.c \
+			MENU/start.c key.c matrix.c utils.c physics.c draw.c \
+			init.c animation.c parse_validity.c map_validity.c hud.c \
+			MENU/level_selector.c
 
-SRC 		= 	main.c parse.c console.c build.c movements.c \
-				MENU/start.c key.c matrix.c utils.c physics.c draw.c \
-				init.c animation.c parse_validity.c map_validity.c hud.c \
-				MENU/level_selector.c
+# Path for .c , .h and .o Files 
+LIBFT	=	./inc/libft/libft.a
+MLX := ./inc/minilibx-linux/libmlx.a
+SRC_PATH := ./
+OBJ_PATH := ./OBJ/
+MLX_PATH := ./inc/minilibx-linux
 
-SRCS = $(addprefix $(SRC_PATH),$(SRC))
-OBJS = ${SRCS:.c=.o}
-OBJ = ${SRC:.c=.o}
+# Compliation under Mac OS
+ifeq ($(shell uname),Darwin)
+INC_PATH := -I ./inc/libft/ -I ./inc/minilibx_macos -I ./inc
+LINKER := -L ./inc/minilibx_macos -lmlx -lm
+FRAMEWORK := -framework Appkit -framework OpenGl
+MLX := ./inc/minilibx_macos
 
-all: ${NAME}
+# Compliation under anything else (but only work under linux)
+else
+INC_PATH := -I ./inc/libft/ -I ./inc/minilibx-linux -I ./inc
+LINKER := -L ./inc/minilibx-linux -lmlx -lX11 -lXext -lm
+FRAMEWORK :=
+MLX_PATH := ./inc/minilibx-linux
+endif
 
-$(LIBFT):
-			make -C libft
+all : $(LIBFT) $(MLX) $(NAME)
 
-$(MINILIB):
-			make -C mlx
+$(MLX) :
+	@echo [INFO] Compliling minilibx
+	@make -C $(MLX_PATH)
 
-%.o: %.c
-			$(CC) -g -Imlx -c $< -o $@
+$(LIBFT) :
+	@echo [INFO] Compliling libft
+	@make -C ./inc/libft
 
-$(NAME): $(OBJ)
-			$(CC) $(OBJ) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+# Files to compile
+OBJ1 := $(FILES:.c=.o)
+OBJ := $(patsubst %,$(OBJ_PATH)%,$(OBJ1))
 
-clean:
-			${RM} ${OBJS}
-			make fclean -C libft
-			make clean -C mlx
-			make fclean -C printf
+# Build .o first
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@echo [CC] $<
+	@$(CC) $(CFLAGS) -o $@ -c $< $(INC_PATH)     
 
-fclean:		clean
-			${RM} ${NAME}
+# Build final Binary
+$(NAME): $(OBJ) $(MLX)
+	@echo [INFO] Creating $(Shell uname) Binary Executable [$(NAME)]
+	$(AR) $(NAME) $(OBJ) $(LINKFLAGS)
+	$(CC) $(CFLAGS) $(NAME) $(LIBFT) $(MLX) $(INC_PATH) $(FRAMEWORK) $(LINKER) -o $(ENAME)
 
-re:			fclean all
+# Clean all the object files and the binary
+clean:   
+	@echo "[Cleaning]"
+	@$(RM) -rfv $(OBJ_PATH)*.o
+	@$(RM) -rfv $(OBJ_PATH)/MENU/*.o
 
-.PHONY: re ignore fclean clean all $(LIBFT) $(NAME) $(MINILIB) $(PRINTF)
+fclean: clean
+		@$(RM) -rfv $(NAME)
+		@$(RM) -rfv $(ENAME)
+deepclean : fclean
+		@make fclean -C ./inc/libft
+		@make clean -C $(MLX_PATH)
+re: fclean all
+
+san: all
+	$(CC) $(CFLAGS) $(NAME) $(LIBFT) $(MLX) $(INC_PATH) $(FRAMEWORK) $(LINKER) -fsanitize=address -o $(ENAME)
+
+test: all
+	./fdf mytest.fdf
+
+.PHONY : clean fclean re
