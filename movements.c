@@ -46,12 +46,12 @@ void	collision(t_level *l, t_vector pos, t_vector edge)
 	while (++i <= l->nb_col)
 	{
 		col = vector_collide(pos, l->collision_map[i], l->texture.width);
-		if (col != 0)
+		if (col > 0)
 		{
 			if (col == 1)
-				l->player.vel.x *= -1;
-			else
 				l->player.vel.y *= -1;
+			if (col == 2)
+				l->player.vel.x *= -1;
 			break ;
 		}
 	}
@@ -83,7 +83,7 @@ void	exit_level(t_level *l)
 	{
 		if (l->player.coins >= l->data.coins_max)
 		{
-			info(add_str("You win level ", ft_itoa(l->player.ls_position + 1)));
+			info(add_str("You win level ", l->name));
 			mlx_destroy_window(l->params.mlx, l->params.mlx_win);
 			free(l->map);
 			free(l->map_matrix);
@@ -93,6 +93,8 @@ void	exit_level(t_level *l)
 			l->data.coins_max = 0;
 			l->player.coins = 0;
 			l->nb_col = 0;
+			if (l->player.max_level == -1)
+				exit(1);
 			if (l->player.ls_position + 1 == l->player.max_level)
 				l->player.max_level++;
 			start_menu(l);
@@ -101,8 +103,10 @@ void	exit_level(t_level *l)
 		{
 			info("Ur 2 broke 2 die");
 			hud_info(l, add_str(add_str("Score: ", score_to_str(l)), " - Ur 2 broke 2 die"));
-			l->player.vel.x *= -1;
-			l->player.vel.y *= -1;
+			if (col == 1)
+				l->player.vel.y *= -1;
+			if (col == 2)
+				l->player.vel.x *= -1;
 		}
 	}
 }

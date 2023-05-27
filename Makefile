@@ -6,7 +6,7 @@
 #    By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/21 21:58:57 by jchapell          #+#    #+#              #
-#    Updated: 2023/05/21 17:14:14 by lebojo           ###   ########.fr        #
+#    Updated: 2023/05/27 14:23:07 by lebojo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,17 +22,17 @@ FILES	=	main.c parse.c console.c build.c movements.c \
 
 # Path for .c , .h and .o Files 
 LIBFT	=	./inc/libft/libft.a
-MLX := ./inc/minilibx-linux/libmlx.a
+MLX 	:= ./inc/minilibx_macos/libmlx.a
 SRC_PATH := ./
 OBJ_PATH := ./OBJ/
-MLX_PATH := ./inc/minilibx-linux
+MLX_PATH := ./inc/minilibx_macos
 
 # Compliation under Mac OS
 ifeq ($(shell uname),Darwin)
-INC_PATH := -I ./inc/libft/ -I ./inc/minilibx_macos -I ./inc
-LINKER := -L ./inc/minilibx_macos -lmlx -lm
-FRAMEWORK := -framework Appkit -framework OpenGl
-MLX := ./inc/minilibx_macos
+MLX 		:= ./inc/minilibx_macos/libmlx.a
+INC_PATH 	:= -I ./inc/libft/ -I ./inc/minilibx_macos/ -I ./inc
+LINKER 		:= -L ./inc/minilibx_macos/ -lmlx -lm
+FRAMEWORK 	:= -framework Appkit -framework OpenGl
 
 # Compliation under anything else (but only work under linux)
 else
@@ -83,8 +83,5 @@ re: fclean all
 
 san: all
 	$(CC) $(CFLAGS) $(NAME) $(LIBFT) $(MLX) $(INC_PATH) $(FRAMEWORK) $(LINKER) -fsanitize=address -o $(ENAME)
-
-test: all
-	./fdf mytest.fdf
 
 .PHONY : clean fclean re

@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "inc/minilibx-linux/mlx.h"
+# include "inc/minilibx_macos/mlx.h"
 # include "struct.h"
 
 # define NAME "BeachBall in a park simulator 2023 XTREME EDITION"

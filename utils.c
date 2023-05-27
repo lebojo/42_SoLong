@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:34:12 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/25 16:54:49 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/27 17:28:01 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,11 @@ void	set_vector(t_vector *v, int x, int y)
 
 int	vector_collide(t_vector v1, t_vector v2, int width)
 {
-	int	v1_right = v1.x + width;
-	int v1_bot = v1.y + width;
-	int v2_right = v2.x + width;
-	int v2_bot = v2.y + width;
-
-	if (v1.x < v2_right && v1_right > v2.x && v1.y < v2_bot && v1_bot > v2.y)
-	{
-		if (v1.x + 16 < v2_right - 5 && v1.x + 16 > v2.x + 5)
-			return (1);
-		if (v1.y + 16 < v2_bot - 5 && v1.y > v2.y + 5)
-			return (2);
-	}
-    return 0; // No collision
+	if ((v1.x + 16 > v2.x && v1.x < v2.x + width) && (v1.y + width > v2.y && v1.y < v2.y + width))
+		return (1);
+	if ((v1.y + 16 > v2.y && v1.y < v2.y + width) && (v1.x + width > v2.x && v1.x < v2.x + width))
+		return (2);
+	return (0);
 }
 
 void	erase_coins(t_level *l, t_vector pos_erase)

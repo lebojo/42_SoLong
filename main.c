@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	if (argc >= 2)
 	{
 		info("Starting...");
+		level.player.max_level = -1;
 		start_level(&level, argv[1]);
 	}
 	else
