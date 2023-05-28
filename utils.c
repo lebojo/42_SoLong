@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 23:34:12 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/27 17:28:01 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/28 03:49:17 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,19 @@ void	set_vector(t_vector *v, int x, int y)
 
 int	vector_collide(t_vector v1, t_vector v2, int width)
 {
-	if ((v1.x + 16 > v2.x && v1.x < v2.x + width) && (v1.y + width > v2.y && v1.y < v2.y + width))
-		return (1);
-	if ((v1.y + 16 > v2.y && v1.y < v2.y + width) && (v1.x + width > v2.x && v1.x < v2.x + width))
-		return (2);
-	return (0);
+ 	if (v1.x < v2.x + width && v1.x + width  > v2.x
+		&& v1.y < v2.y + width && v1.y + width > v2.y ) // Ca marche
+	{
+		if (v1.x + 15 > v2.x && v1.x + 17 < v2.x + width && v1.y > v2.y + width)
+			return(2);
+		if (v1.y + 15 > v2.y && v1.y + 17 < v2.y + width && v1.x + width > v2.x)
+			return(3);
+		if (v1.x + 15 > v2.x && v1.x + 17 < v2.x + width && v1.y + width > v2.y)
+			return(4);
+		if (v1.y + 15 > v2.y && v1.y + 17 < v2.y + width && v1.x < v2.x + width)
+			return(1);
+	}
+    return (0); // No collision
 }
 
 void	erase_coins(t_level *l, t_vector pos_erase)

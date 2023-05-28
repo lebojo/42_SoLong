@@ -49,9 +49,13 @@ void	collision(t_level *l, t_vector pos, t_vector edge)
 		if (col > 0)
 		{
 			if (col == 1)
-				l->player.vel.y *= -1;
-			if (col == 2)
 				l->player.vel.x *= -1;
+			if (col == 2)
+				l->player.vel.y *= -1;
+			if (col == 3)
+				l->player.vel.x *= -1;
+			if (col == 4)
+				l->player.vel.y *= -1;
 			break ;
 		}
 	}
