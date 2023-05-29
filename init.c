@@ -15,7 +15,7 @@
 void	init_player_frames(t_level *l)
 {
 	t_vector	img;
-	
+
 	l->texture.player[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player1.xpm", &img.x, &img.y);
 	l->texture.player[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player2.xpm", &img.x, &img.y);
 	l->texture.player[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player3.xpm", &img.x, &img.y);
@@ -27,7 +27,7 @@ void	init_player_frames(t_level *l)
 void	init_coins_frames(t_level *l)
 {
 	t_vector	img;
-	
+
 	l->texture.coins[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_1.xpm", &img.x, &img.y);
 	l->texture.coins[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_2.xpm", &img.x, &img.y);
 	l->texture.coins[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_3.xpm", &img.x, &img.y);

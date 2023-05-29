@@ -12,7 +12,7 @@
 
 #include "proto.h"
 
-int	int_to_dir(int	key) //0 = gauche, 1 = haut, 2 = droite, 3 = bas, 4 = enter 0 = pas reconnu
+int	int_to_dir(int key)
 {
 	if (key == 2 || key == 124
 		|| key == 65363 || key == 100)
@@ -50,7 +50,7 @@ void	collision(t_level *l, t_vector pos, t_vector edge)
 		{
 			l->player.vel.x *= -1;
 			l->player.vel.y *= -1;
-			break;
+			break ;
 		}
 	}
 }
@@ -75,8 +75,9 @@ void	collect_coins(t_level *l)
 
 void	exit_level(t_level *l)
 {
-	int col = vector_collide(l->player.pos, l->exit, l->texture.width);
+	int	col;
 
+	col = vector_collide(l->player.pos, l->exit, l->texture.width);
 	if (col != 0)
 	{
 		if (l->player.coins >= l->data.coins_max)
@@ -102,10 +103,11 @@ void	exit_level(t_level *l)
 		{
 			info("Ur 2 broke 2 die");
 			hud_info(l, add_str(add_str("Score: ", score_to_str(l)), " - Ur 2 broke 2 die"));
-			if (col == 1)
-				l->player.vel.y *= -1;
-			if (col == 2)
+			if (col > 0)
+			{
 				l->player.vel.x *= -1;
+				l->player.vel.y *= -1;
+			}
 		}
 	}
 }

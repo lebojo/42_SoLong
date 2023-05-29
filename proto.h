@@ -47,7 +47,7 @@ void		start_level(t_level *lvl, char *path);
 void		add_collision(t_level *l, t_vector pos, int nb_col);
 
 /*MOVEMENTS			*/
-int			int_to_dir(int	key);
+int			int_to_dir(int key);
 void		collision(t_level *l, t_vector pos, t_vector edge);
 void		player_process(t_level *l);
 void		collect_coins(t_level *l);
@@ -57,9 +57,10 @@ void		exit_level(t_level *l);
 int			draw_player(t_level *l);
 void		draw_level(t_level *lvl);
 void		draw_screen(t_level *l);
-void 		draw_bcgk(t_level *lvl, t_vector start, t_vector end);
-void 		draw_hud(t_level *l);
+void		draw_bcgk(t_level *lvl, t_vector start, t_vector end);
+void		draw_hud(t_level *l);
 void		draw_around_player(t_level *l);
+void		draw_image(t_level *l, char *path, t_vector p);
 
 /*PHYSICS			*/
 int			physics_process(t_level *l);
@@ -69,13 +70,10 @@ void		move_player(t_level *l);
 void		set_vector(t_vector *v, int x, int y);
 int			vector_collide(t_vector v1, t_vector v2, int width);
 void		erase_coins(t_level *l, t_vector pos_erase);
-t_vector 	vector(int x, int y);
+t_vector	vector(int x, int y);
 char		*add_str(char *s1, char *s2);
 char		*lvl_name_extractor(char *s);
 int			check_ext(char *s, char *ext);
-int			near_32(int num);
-int			abs(int	num);
-int			near_0(int num);
 
 /*MATRIX			*/
 void		add_collision(t_level *l, t_vector pos, int nb_col);

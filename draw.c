@@ -32,7 +32,7 @@ int	draw_coins(t_level *l, t_params prm, t_vector pos)
 	return (0);
 }
 
-int draw_cell(t_level *lvl, char c, t_params prm, t_vector pos)
+int	draw_cell(t_level *lvl, char c, t_params prm, t_vector pos)
 {
 	if (c == '\n')
 		return (0);
@@ -69,7 +69,7 @@ void	draw_wall(t_level *l)
 	}
 }
 
-void draw_level(t_level *lvl)
+void	draw_level(t_level *lvl)
 {
 	t_vector	pos;
 	t_vector	cursor;
@@ -91,10 +91,10 @@ void draw_level(t_level *lvl)
 	}
 }
 
-void draw_hud(t_level *l)
+void	draw_hud(t_level *l)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < l->data.size.x)
 		mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, l->texture.blck, i++ * 32, 0);
@@ -106,4 +106,9 @@ void	draw_screen(t_level *l)
 	draw_level(l);
 	draw_player(l);
 	draw_wall(l);
+}
+
+void	draw_image(t_level *l, char *path, t_vector p)
+{
+	mlx_put_image_to_window(l->params.mlx, l->params.mlx_win, path, p.x, p.y);
 }

@@ -35,7 +35,7 @@ int	parse_validity(t_level lvl)
 	int				i;
 	t_vector		pos;
 	t_requierements	req;
-	int			**visited;
+	int				**visited;
 
 	i = -1;
 	req.bool_coins = 0;

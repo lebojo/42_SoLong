@@ -15,23 +15,23 @@
 void	set_vector(t_vector *v, int x, int y)
 {
 	v->x = x;
-	v->y = y;	
+	v->y = y;
 }
 
-int vector_collide(t_vector v1, t_vector v2, int width)
+int	vector_collide(t_vector v1, t_vector v2, int width)
 {
-	int v1Right;
-	int v1Bottom;
-	int v2Right;;
-	int v2Bottom;;
+	int	v1_r;
+	int	v1_b;
+	int	v2_r;
+	int	v2_b;
 
-	v1Right = v1.x + width - 2;
-	v1Bottom = v1.y + width - 2;
-	v2Right = v2.x + width - 5;
-	v2Bottom = v2.y + 20;
+	v1_r = v1.x + width - 2;
+	v1_b = v1.y + width - 2;
+	v2_r = v2.x + width - 5;
+	v2_b = v2.y + 20;
 	set_vector(&v1, v1.x + 2, v1.y + 2);
 	set_vector(&v2, v2.x + 5, v2.y + 15);
-	if (v1.x <= v2Right && v1Right >= v2.x && v1.y <= v2Bottom && v1Bottom >= v2.y)
+	if (v1.x <= v2_r && v1_r >= v2.x && v1.y <= v2_b && v1_b >= v2.y)
 		return (1);
 	return (0);
 }
@@ -43,21 +43,21 @@ void	erase_coins(t_level *l, t_vector pos_erase)
 	l->map_matrix[pos_erase.y][pos_erase.x] = l->data.empty;
 }
 
-t_vector vector(int x, int y)
+t_vector	vector(int x, int y)
 {
-	t_vector res;
+	t_vector	res;
 
 	res.x = x;
 	res.y = y;
 	return (res);
 }
 
-char		*add_str(char *s1, char *s2)
+char	*add_str(char *s1, char *s2)
 {
 	char	*res;
 	int		i;
 	int		ii;
-	
+
 	res = malloc(ft_strlen(s1) + ft_strlen(s2) + sizeof(char));
 	i = -1;
 	ii = 0;
@@ -68,6 +68,7 @@ char		*add_str(char *s1, char *s2)
 	res[i] = '\0';
 	return (res);
 }
+
 char	*lvl_name_extractor(char *s)
 {
 	int		i;
@@ -97,35 +98,4 @@ int	check_ext(char *s, char *ext)
 		if (end_ext == 0)
 			return (1);
 	return (0);
-}
-
-int	near_32(int num)
-{
-	int quotient = num / 32;
-	int multiple = quotient * 32;
-
-	int lower_multiple = multiple;
-	int upper_multiple = multiple + 32;
-
-	if (num - lower_multiple < upper_multiple - num) {
-		return lower_multiple;
-	} else {
-		return upper_multiple;
-	}
-}
-
-int	near_0(int num)
-{
-	if (num > 0)
-		return (2);
-	if (num < 0)
-		return (-2);
-	return (0);	
-}
-
-int	abs(int	num)
-{
-	if (num < 0)
-		return (num * -1);
-	return (num);
 }

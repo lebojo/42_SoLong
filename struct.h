@@ -41,10 +41,10 @@ typedef struct s_path
 	char		*empty;
 	char		*wall;
 	char		*player[4];
-	t_range		pf; //pf = player frame
+	t_range		pf;
 	char		*exit;
 	char		*coins[8];
-	t_range		cf; //cf = coins frame
+	t_range		cf;
 	char		*blck;
 	int			width;
 }	t_path;

@@ -105,7 +105,3 @@ void	start_menu(t_level *l)
 	mlx_loop_hook(l->params.mlx, level_selector_process, l);
 	mlx_loop(l->params.mlx);
 }
-/*TODO:
-Faire les différentes pos pour le player, genre quand on touche
-Genre et griser les 
-*/

@@ -14,7 +14,7 @@
 
 void	reset_keys(t_level *lvl)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 5)
@@ -24,7 +24,7 @@ void	reset_keys(t_level *lvl)
 	}
 }
 
-void draw_but(t_level *lvl)
+void	draw_but(t_level *lvl)
 {
 	int		w;
 	int		h;
@@ -40,9 +40,9 @@ void draw_but(t_level *lvl)
 	mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, logo, 15, 10);
 }
 
-void draw_bcgk(t_level *lvl, t_vector start, t_vector end)
+void	draw_bcgk(t_level *lvl, t_vector start, t_vector end)
 {
-	t_vector pos;
+	t_vector	pos;
 
 	pos.x = start.x;
 	while (pos.x < end.x)
@@ -57,7 +57,6 @@ void draw_bcgk(t_level *lvl, t_vector start, t_vector end)
 	}
 }
 
-
 int	menu_process(t_level *l)
 {
 	if (l->key[4] == 1)
@@ -69,7 +68,7 @@ int	menu_process(t_level *l)
 		info("Starting...");
 		start_menu(l);
 	}
-	if (l->key[1] == 1 || l->key[3] == 1 )
+	if (l->key[1] == 1 || l->key[3] == 1)
 	{
 		if (l->player.pos.y == 220)
 			l->player.pos.y = 180;

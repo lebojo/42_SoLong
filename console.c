@@ -12,7 +12,7 @@
 
 #include "proto.h"
 
-int error(char *str)
+int	error(char *str)
 {
 	ft_putstr_fd("\033[0;31m[ERROR] \033[0m", 0);
 	ft_putstr_fd(str, 0);
@@ -20,14 +20,14 @@ int error(char *str)
 	return (1);
 }
 
-int info(char *str)
+int	info(char *str)
 {
 	ft_putstr_fd("\e[0;32m[", 0);
 	ft_putstr_fd(NAME_SHORT, 0);
 	ft_putstr_fd("] \033[0m", 0);
 	ft_putstr_fd(str, 0);
 	ft_putchar_fd('\n', 0);
-	return(1);
+	return (1);
 }
 
 void	print_score(int min, int max)

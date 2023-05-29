@@ -17,7 +17,7 @@ int	build_matrix(t_level *lvl)
 	int			i;
 	int			cel;
 	t_vector	pos;
-	
+
 	i = 0;
 	pos.x = 0;
 	pos.y = 0;

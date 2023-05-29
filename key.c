@@ -12,14 +12,14 @@
 
 #include "proto.h"
 
-int key_press(int keycode, t_level *lvl)
+int	key_press(int keycode, t_level *lvl)
 {
 	lvl->key[int_to_dir(keycode)] = 1;
 	return (0);
 }
 
-int key_release(int keycode, t_level *lvl)
+int	key_release(int keycode, t_level *lvl)
 {
-    lvl->key[int_to_dir(keycode)] = 0;
+	lvl->key[int_to_dir(keycode)] = 0;
 	return (0);
 }
