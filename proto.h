@@ -74,6 +74,8 @@ char		*add_str(char *s1, char *s2);
 char		*lvl_name_extractor(char *s);
 int			check_ext(char *s, char *ext);
 int			near_32(int num);
+int			abs(int	num);
+int			near_0(int num);
 
 /*MATRIX			*/
 void		add_collision(t_level *l, t_vector pos, int nb_col);

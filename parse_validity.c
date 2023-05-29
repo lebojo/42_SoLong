@@ -76,8 +76,7 @@ int	parse_validity(t_level lvl)
 		pos.x++;
 	}
 	if (check_req(req) == 1)
-		return (error("Map not complete"));
+		return (error("Map incomplete"));
 	info("Map ok!");
 	return (0);
 }
-//return 1 == error, 0 == good 🏆

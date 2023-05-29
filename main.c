@@ -24,6 +24,7 @@ int	main(int argc, char **argv)
 	{
 		info("Starting...");
 		level.player.max_level = -1;
+		reset_keys(&level);
 		start_level(&level, argv[1]);
 	}
 	else

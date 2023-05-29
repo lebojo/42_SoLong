@@ -82,6 +82,7 @@ void	exit_level(t_level *l)
 		if (l->player.coins >= l->data.coins_max)
 		{
 			info(add_str("You win level ", l->name));
+			info(add_str("With time: ", ft_itoa(l->time)));
 			mlx_destroy_window(l->params.mlx, l->params.mlx_win);
 			free(l->map);
 			free(l->map_matrix);

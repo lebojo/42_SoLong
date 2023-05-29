@@ -39,6 +39,8 @@ int	build_matrix(t_level *lvl)
 			pos.x = 0;
 			pos.y += 1;
 			lvl->map_matrix[pos.y] = malloc(sizeof(char) * (lvl->data.size.x + 1));
+			i++;
+			continue ;
 		}
 		lvl->map_matrix[pos.y][pos.x] = cel;
 		i++;
