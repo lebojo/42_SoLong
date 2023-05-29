@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 23:34:12 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/28 03:49:17 by jchapell         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   utils.c											:+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: lebojo <lebojo@student.42.fr>			  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2023/05/06 23:34:12 by jchapell		  #+#	#+#			 */
+/*   Updated: 2023/05/29 03:06:49 by lebojo		   ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "proto.h"
@@ -18,21 +18,22 @@ void	set_vector(t_vector *v, int x, int y)
 	v->y = y;	
 }
 
-int	vector_collide(t_vector v1, t_vector v2, int width)
+int vector_collide(t_vector v1, t_vector v2, int width)
 {
- 	if (v1.x < v2.x + width && v1.x + width  > v2.x
-		&& v1.y < v2.y + width && v1.y + width > v2.y ) // Ca marche
-	{
-		if (v1.x + 15 > v2.x && v1.x + 17 < v2.x + width && v1.y > v2.y + width)
-			return(2);
-		if (v1.y + 15 > v2.y && v1.y + 17 < v2.y + width && v1.x + width > v2.x)
-			return(3);
-		if (v1.x + 15 > v2.x && v1.x + 17 < v2.x + width && v1.y + width > v2.y)
-			return(4);
-		if (v1.y + 15 > v2.y && v1.y + 17 < v2.y + width && v1.x < v2.x + width)
-			return(1);
-	}
-    return (0); // No collision
+	int v1Right;
+	int v1Bottom;
+	int v2Right;;
+	int v2Bottom;;
+
+	v1Right = v1.x + width - 2;
+	v1Bottom = v1.y + width - 2;
+	v2Right = v2.x + width - 5;
+	v2Bottom = v2.y + 20;
+	set_vector(&v1, v1.x + 2, v1.y + 2);
+	set_vector(&v2, v2.x + 5, v2.y + 15);
+	if (v1.x <= v2Right && v1Right >= v2.x && v1.y <= v2Bottom && v1Bottom >= v2.y)
+		return (1);
+	return (0);
 }
 
 void	erase_coins(t_level *l, t_vector pos_erase)
@@ -111,4 +112,20 @@ int	near_32(int num)
 	} else {
 		return upper_multiple;
 	}
+}
+
+int	near_0(int num)
+{
+	if (num > 0)
+		return (2);
+	if (num < 0)
+		return (-2);
+	return (0);	
+}
+
+int	abs(int	num)
+{
+	if (num < 0)
+		return (num * -1);
+	return (num);
 }
