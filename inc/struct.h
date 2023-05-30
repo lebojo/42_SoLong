@@ -63,8 +63,6 @@ typedef struct s_requierements
 	int	bool_player;
 	int	bool_exit;
 	int	bool_coins;
-	int	bool_path;
-	int	bool_wall;
 }	t_requierements;
 
 typedef struct s_player
@@ -73,6 +71,7 @@ typedef struct s_player
 	int			coins;
 	int			ls_position;
 	int			max_level;
+	int			move;
 	t_vector	vel;
 }	t_player;
 

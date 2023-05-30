@@ -30,22 +30,22 @@ int	info(char *str)
 	return (1);
 }
 
+void	print_move(int m)
+{
+	ft_putstr_fd("\e[0;32m[", 0);
+	ft_putstr_fd("Move", 0);
+	ft_putstr_fd("] \033[0m", 0);
+	ft_putnbr_fd(m, 1);
+	ft_putchar_fd('\n', 1);
+}
+
 void	print_score(int min, int max)
 {
+	ft_putstr_fd("\e[0;32m[", 0);
+	ft_putstr_fd("Coins", 0);
+	ft_putstr_fd("] \033[0m", 0);
 	ft_putnbr_fd(min, 1);
 	ft_putchar_fd('/', 1);
 	ft_putnbr_fd(max, 1);
 	ft_putchar_fd('\n', 1);
-}
-
-void	print_pos(char *title, t_vector v)
-{
-	ft_putstr_fd("\e[0;32m[", 0);
-	ft_putstr_fd(title, 0);
-	ft_putstr_fd("] \033[0m", 0);
-	ft_putstr_fd("\tX: ", 0);
-	ft_putnbr_fd(v.x, 0);
-	ft_putstr_fd("\tY: ", 0);
-	ft_putnbr_fd(v.y, 0);
-	ft_putstr_fd("\n", 0);
 }

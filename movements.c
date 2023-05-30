@@ -28,8 +28,6 @@ int	int_to_dir(int key)
 		return (3);
 	else if (key == 36)
 		return (4);
-	else if (key == 53 || key == 65307)
-		exit(info("Game closed"));
 	return (0);
 }
 
@@ -75,19 +73,21 @@ void	collect_coins(t_level *l)
 
 void	end_level(t_level *l)
 {
-	info(add_str("You win level ", l->name));
-	info(add_str("With time: ", ft_itoa(l->time)));
+	char	*tmp;
+
+	tmp = add_str("You win level ", l->name, 0);
+	tmp = add_str(tmp, ", With time: ", 1);
+	tmp = add_str(tmp, ft_itoa(l->time), 3);
+	info(tmp);
+	free(tmp);
 	mlx_destroy_window(l->prm.mlx, l->prm.mlx_win);
-	free(l->map);
-	free(l->map_matrix);
-	free(l->map_c);
-	free(l->name);
+	if (l->player.max_level == -1)
+		clean_exit(l);
+	free_level(l);
 	set_vector(&l->data.size, -1, 1);
 	l->data.coins_max = 0;
 	l->player.coins = 0;
 	l->nb_col = 0;
-	if (l->player.max_level == -1)
-		exit(1);
 	if (l->player.ls_position + 1 == l->player.max_level)
 		l->player.max_level++;
 	start_menu(l);
@@ -96,7 +96,6 @@ void	end_level(t_level *l)
 void	exit_level(t_level *l)
 {
 	int		col;
-	char	*tmp;
 
 	col = vector_collide(l->player.pos, l->exit, l->tx.width);
 	if (col != 0)
@@ -108,10 +107,6 @@ void	exit_level(t_level *l)
 		else
 		{
 			info("Ur 2 broke 2 die");
-			tmp = add_str("Score: ", score_to_str(l));
-			tmp = add_str(tmp, " - Ur 2 broke 2 die");
-			hud_info(l, tmp);
-			free(tmp);
 			if (col > 0)
 			{
 				l->player.vel.x *= -1;

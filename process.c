@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 03:53:34 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 03:56:44 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 22:48:18 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	physics_process(t_level *l)
 {
 	friction(l);
 	draw_screen(l);
-	hud_info(l, add_str("Coins: ", score_to_str(l)));
+	hud_info(l, "");
 	return (0);
 }
 
@@ -54,10 +54,11 @@ int	level_selector_process(t_level *l)
 {
 	char	*at;
 
-	at = add_str("Actual time: ", ft_itoa(l->time));
+	at = add_str("Actual time: ", ft_itoa(l->time), 2);
 	draw_bcgk(l, vector(0, 0), vector(350, 350));
 	mlx_string_put(l->prm.mlx, l->prm.mlx_win, 120, 93, 0x000000, at);
 	mlx_string_put(l->prm.mlx, l->prm.mlx_win, 120, 91, 0xFFFFFF, at);
+	free(at);
 	draw_menu_level(l, l->ls_pos);
 	player_position(l);
 	draw_player(l);

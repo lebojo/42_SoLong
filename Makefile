@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+         #
+#    By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/21 21:58:57 by jchapell          #+#    #+#              #
-#    Updated: 2023/05/30 04:21:52 by lebojo           ###   ########.fr        #
+#    Updated: 2023/05/30 23:09:48 by jchapell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ ENAME	=	so_long
 NAME	=	so_long.a
 CFLAGS	=	-Wall -Werror -Wextra
 AR		=	ar -rsc
-FILES	=	main.c parse.c console.c build.c movements.c \
+FILES	=	main.c parse.c console.c build.c movements.c free.c\
 			MENU/start.c key.c matrix.c utils.c physics.c draw.c \
 			init.c animation.c parse_validity.c map_validity.c hud.c \
 			MENU/level_selector.c draw_cell.c process.c vector.c shortcut.c

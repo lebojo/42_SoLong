@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:03:45 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 03:56:24 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 22:50:21 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	draw_menu(t_level *lvl)
 	draw_player(lvl);
 	mlx_hook(lvl->prm.mlx_win, 2, 0, key_press, lvl);
 	mlx_hook(lvl->prm.mlx_win, 3, 0, key_release, lvl);
+	mlx_hook(lvl->prm.mlx_win, 17, 0, clean_exit, lvl);
 	mlx_loop_hook(lvl->prm.mlx, menu_process, lvl);
 	mlx_loop(lvl->prm.mlx);
 }

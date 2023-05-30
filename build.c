@@ -71,7 +71,9 @@ void	start_level(t_level *l, char *path)
 		exit(error("Coin(s) can't be collected"));
 	l->name = lvl_name_extractor(path);
 	draw_level(l);
+	l->player.move = 0;
 	mlx_hook(l->prm.mlx_win, 2, 0, key_press, l);
+	mlx_hook(l->prm.mlx_win, 17, 0, clean_exit, l);
 	mlx_hook(l->prm.mlx_win, 3, 0, key_release, l);
 	mlx_loop_hook(l->prm.mlx, physics_process, l);
 	mlx_loop(l->prm.mlx);

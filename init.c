@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:22:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 03:56:44 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/31 00:16:52 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	init_level(t_level *l)
 	set_vector(&l->data.size, -1, 1);
 	l->data.coins_max = 0;
 	l->player.coins = 0;
+	l->player.move = 0;
 	set_vector(&l->player.vel, 0, 0);
 	l->player.pos.x = -1;
 	l->player.ls_position = 0;
@@ -82,10 +83,11 @@ void	init_ls(t_level *l)
 	set_vector(&pos, 80, 100);
 	while (++i <= 9)
 	{
-		tmp = add_str(add_str("./assets/09/n", ft_itoa(i)), ".xpm");
+		tmp = add_str(add_str("./assets/09/n", ft_itoa(i), 2), ".xpm", 1);
 		l->ls_09[i] = path_to_image(l, tmp);
 		free(tmp);
-		tmp = add_str(add_str("./assets/09/darker/n", ft_itoa(i)), ".xpm");
+		tmp = add_str("./assets/09/darker/n", ft_itoa(i), 2);
+		tmp = add_str(tmp, ".xpm", 1);
 		l->ls_09_dark[i] = path_to_image(l, tmp);
 		free(tmp);
 		if (i % 3 == 0)

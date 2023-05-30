@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validity.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:41:39 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 03:56:44 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 23:29:54 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,9 @@ int	can_collect_coins(t_level *l)
 		cpy = map_extract(l);
 		set_vector(&pos, (l->map_c[i].x / 32) + 1, (l->map_c[i].y / 32) - 1);
 		result = coin_check(pos, l->data.size, cpy);
-		free(cpy);
+		free_matrix(l->data.size.y, cpy);
 		if (result != 1)
-		{
 			return (0);
-		}
 		i++;
 	}
 	info("Coins ok!");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   level_selector.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:35:06 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 04:38:45 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 22:53:48 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,19 @@ void	player_position(t_level *l)
 void	launch_level(t_level *l)
 {
 	char	*path;
+	char	*tmp;
 
 	if (l->key[4] == 1)
 	{
-		path = add_str("maps/", ft_itoa(l->player.ls_position + 1));
+		path = add_str("maps/", ft_itoa(l->player.ls_position + 1), 2);
 		mlx_destroy_window(l->prm.mlx, l->prm.mlx_win);
 		reset_keys(l);
-		info(add_str("Starting level ", ft_itoa(l->player.ls_position)));
-		start_level(l, add_str(path, ".ber"));
+		set_vector(&l->player.vel, 0, 0);
+		tmp = add_str("Starting level ", ft_itoa(l->player.ls_position), 2);
+		info(tmp);
+		free(tmp);
+		path = add_str(path, ".ber", 1);
+		start_level(l, path);
 	}
 }
 
@@ -90,6 +95,7 @@ void	start_menu(t_level *l)
 	init_ls(l);
 	mlx_hook(l->prm.mlx_win, 2, 0, key_press, l);
 	mlx_hook(l->prm.mlx_win, 3, 0, key_release, l);
+	mlx_hook(l->prm.mlx_win, 17, 0, clean_exit, l);
 	mlx_loop_hook(l->prm.mlx, level_selector_process, l);
 	mlx_loop(l->prm.mlx);
 }

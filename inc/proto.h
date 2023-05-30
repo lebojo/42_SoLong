@@ -38,13 +38,12 @@ int			parse_validity(t_level lvl);
 /*CONSOLE			*/
 int			error(char *str);
 int			info(char *str);
+void		print_move(int m);
 void		print_score(int min, int max);
-void		print_pos(char *title, t_vector v);
 
 /*BUILD				*/
 int			build_matrix(t_level *lvl);
 void		start_level(t_level *lvl, char *path);
-void		add_collision(t_level *l, t_vector pos, int nb_col);
 
 /*MOVEMENTS			*/
 int			int_to_dir(int key);
@@ -65,15 +64,13 @@ int			draw_cell(t_level *lvl, char c, t_vector pos);
 /*PHYSICS			*/
 void		friction(t_level *l);
 void		move_player(t_level *l);
-void		friction(t_level *l);
-void		move_player(t_level *l);
 
 /*UTILS				*/
 void		set_vector(t_vector *v, int x, int y);
 int			vector_collide(t_vector v1, t_vector v2, int width);
 void		erase_coins(t_level *l, t_vector pos_erase);
 t_vector	vector(int x, int y);
-char		*add_str(char *s1, char *s2);
+char		*add_str(char *s1, char *s2, int f);
 char		*lvl_name_extractor(char *s);
 int			check_ext(char *s, char *ext);
 void		*path_to_image(t_level *l, char *path);
@@ -86,6 +83,7 @@ void		add_coins(t_level *l, t_vector pos, int nb_coins);
 /*KEY				*/
 int			key_press(int keycode, t_level *lvl);
 int			key_release(int keycode, t_level *lvl);
+int			clean_exit(t_level *l);
 
 /*ANIMATION			*/
 void		anim_coins(t_level *l);
@@ -103,6 +101,10 @@ int			level_selector_process(t_level *l);
 void		animation_process(t_level *l);
 int			physics_process(t_level *l);
 void		player_process(t_level *l);
+
+/*FREE				*/
+void		free_matrix(int max, char **matrix);
+void		free_level(t_level *l);
 
 /*
 MENU
