@@ -6,11 +6,11 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:41:39 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/29 17:49:55 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 03:56:44 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "proto.h"
+#include "inc/proto.h"
 
 void	print_matrix(char **map, t_vector size);
 
@@ -43,12 +43,12 @@ char	**map_extract(t_level *l)
 	t_vector	pos;
 	char		**res;
 
-	i = 0;
+	i = -1;
 	pos.x = 0;
 	pos.y = 0;
 	res = malloc(sizeof(char *) * l->data.size.y);
 	res[0] = malloc(sizeof(char) * l->data.size.x + 1);
-	while (l->map[i])
+	while (l->map[++i])
 	{
 		cel = l->map[i];
 		if (cel != '\n')
@@ -58,27 +58,26 @@ char	**map_extract(t_level *l)
 			pos.x = 0;
 			pos.y += 1;
 			res[pos.y] = malloc(sizeof(char) * (l->data.size.x + 1));
-			i++;
 			continue ;
 		}
 		res[pos.y][pos.x] = cel;
-		i++;
 	}
-	info("Matrix copied!");
 	return (res);
 }
 
 int	can_collect_coins(t_level *l)
 {
-	int		i;
-	char	**cpy;
-	int		result;
+	int			i;
+	char		**cpy;
+	int			result;
+	t_vector	pos;
 
 	i = 0;
 	while (i < l->data.coins_max)
 	{
 		cpy = map_extract(l);
-		result = coin_check(vector((l->coins_map[i].x / 32) + 1, (l->coins_map[i].y / 32) - 1), l->data.size, cpy);
+		set_vector(&pos, (l->map_c[i].x / 32) + 1, (l->map_c[i].y / 32) - 1);
+		result = coin_check(pos, l->data.size, cpy);
 		free(cpy);
 		if (result != 1)
 		{

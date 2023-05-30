@@ -10,7 +10,7 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "proto.h"
+#include "inc/proto.h"
 
 #include <stdio.h>
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 {
 	t_level		level;
 
-	level.params.mlx = mlx_init();
+	level.prm.mlx = mlx_init();
 	init_level(&level);
 	if (argc >= 2)
 	{

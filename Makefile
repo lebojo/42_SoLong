@@ -6,7 +6,7 @@
 #    By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/21 21:58:57 by jchapell          #+#    #+#              #
-#    Updated: 2023/05/27 14:23:07 by lebojo           ###   ########.fr        #
+#    Updated: 2023/05/30 04:21:52 by lebojo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ AR		=	ar -rsc
 FILES	=	main.c parse.c console.c build.c movements.c \
 			MENU/start.c key.c matrix.c utils.c physics.c draw.c \
 			init.c animation.c parse_validity.c map_validity.c hud.c \
-			MENU/level_selector.c
+			MENU/level_selector.c draw_cell.c process.c vector.c shortcut.c
 
 # Path for .c , .h and .o Files 
 LIBFT	=	./inc/libft/libft.a

@@ -6,103 +6,92 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:22:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 01:42:28 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 03:56:44 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "proto.h"
+#include "inc/proto.h"
 
 void	init_player_frames(t_level *l)
 {
-	t_vector	img;
-
-	l->texture.player[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player_1.xpm", &img.x, &img.y);
-	l->texture.player[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player_2.xpm", &img.x, &img.y);
-	l->texture.player[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player_3.xpm", &img.x, &img.y);
-	l->texture.player[3] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player_4.xpm", &img.x, &img.y);
-	l->texture.pf.nb = 0;
-	l->texture.pf.max = 3;
+	l->tx.player[0] = path_to_image(l, "./assets/player_frames/player_1.xpm");
+	l->tx.player[1] = path_to_image(l, "./assets/player_frames/player_2.xpm");
+	l->tx.player[2] = path_to_image(l, "./assets/player_frames/player_3.xpm");
+	l->tx.player[3] = path_to_image(l, "./assets/player_frames/player_4.xpm");
+	l->tx.pf.nb = 0;
+	l->tx.pf.max = 3;
 }
 
 void	init_coins_frames(t_level *l)
 {
-	t_vector	img;
-
-	l->texture.coins[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_1.xpm", &img.x, &img.y);
-	l->texture.coins[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_2.xpm", &img.x, &img.y);
-	l->texture.coins[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_3.xpm", &img.x, &img.y);
-	l->texture.coins[3] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_4.xpm", &img.x, &img.y);
-	l->texture.coins[4] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_5.xpm", &img.x, &img.y);
-	l->texture.coins[5] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_6.xpm", &img.x, &img.y);
-	l->texture.coins[6] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_7.xpm", &img.x, &img.y);
-	l->texture.coins[7] = mlx_xpm_file_to_image(l->params.mlx, "./assets/coins_frames/coins_8.xpm", &img.x, &img.y);
-	l->texture.cf.nb = 0;
-	l->texture.cf.max = 7;
+	l->tx.coins[0] = path_to_image(l, "./assets/coins_frames/coins_1.xpm");
+	l->tx.coins[1] = path_to_image(l, "./assets/coins_frames/coins_2.xpm");
+	l->tx.coins[2] = path_to_image(l, "./assets/coins_frames/coins_3.xpm");
+	l->tx.coins[3] = path_to_image(l, "./assets/coins_frames/coins_4.xpm");
+	l->tx.coins[4] = path_to_image(l, "./assets/coins_frames/coins_5.xpm");
+	l->tx.coins[5] = path_to_image(l, "./assets/coins_frames/coins_6.xpm");
+	l->tx.coins[6] = path_to_image(l, "./assets/coins_frames/coins_7.xpm");
+	l->tx.coins[7] = path_to_image(l, "./assets/coins_frames/coins_8.xpm");
+	l->tx.cf.nb = 0;
+	l->tx.cf.max = 7;
 }
 
-void	init_level(t_level *level)
+void	init_tx(t_level *l)
 {
-	int			img_width;
-	int			img_height;
+	init_player_frames(l);
+	init_coins_frames(l);
+	l->tx.empty[0] = path_to_image(l, "./assets/floor.xpm");
+	l->tx.empty[1] = path_to_image(l, "./assets/floor2.xpm");
+	l->tx.wall = path_to_image(l, "./assets/wall.xpm");
+	l->tx.exit = path_to_image(l, "./assets/enemy.xpm");
+	l->tx.blck = path_to_image(l, "./assets/blck.xpm");
+	l->tx.pb = path_to_image(l, "./assets/start_title.xpm");
+	l->tx.qb = path_to_image(l, "./assets/quit_title.xpm");
+	l->tx.logo = path_to_image(l, "./assets/logo.xpm");
+	l->tx.width = 32;
+}
 
-	level->time = 0;
-	level->data.coins = 'C';
-	level->data.empty = '0';
-	level->data.wall = '1';
-	level->data.exit = 'E';
-	level->data.player = 'P';
-	set_vector(&level->data.size, -1, 1);
-	level->data.coins_max = 0;
-	level->player.coins = 0;
-	set_vector(&level->player.vel, 0, 0);
-	level->player.pos.x = -1;
-	level->player.ls_position = 0;
-	level->player.max_level = 1;
-	level->nb_col = 0;
-	level->collision_map = malloc(sizeof(t_vector));
-	init_player_frames(level);
-	init_coins_frames(level);
-	level->texture.empty[0] = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor.xpm", &img_width, &img_height);
-	level->texture.empty[1] = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor2.xpm", &img_width, &img_height);
-	level->texture.wall = mlx_xpm_file_to_image(level->params.mlx, "./assets/wall.xpm", &img_width, &img_height);
-	level->texture.exit = mlx_xpm_file_to_image(level->params.mlx, "./assets/enemy.xpm", &img_width, &img_height);
-	level->texture.blck = mlx_xpm_file_to_image(level->params.mlx, "./assets/blck.xpm", &img_width, &img_height);
-	level->texture.width = 32;
+void	init_level(t_level *l)
+{
+	l->time = 0;
+	l->data.coins = 'C';
+	l->data.empty = '0';
+	l->data.wall = '1';
+	l->data.exit = 'E';
+	l->data.player = 'P';
+	set_vector(&l->data.size, -1, 1);
+	l->data.coins_max = 0;
+	l->player.coins = 0;
+	set_vector(&l->player.vel, 0, 0);
+	l->player.pos.x = -1;
+	l->player.ls_position = 0;
+	l->player.max_level = 1;
+	l->nb_col = 0;
+	l->collision_map = malloc(sizeof(t_vector));
+	init_tx(l);
 	info("Game initiated");
 }
 
 void	init_ls(t_level *l)
 {
-	t_vector	img;
+	int			i;
+	char		*tmp;
+	t_vector	pos;
 
-	l->ls_pos[0] = vector(80, 100);
-	l->ls_pos[1] = vector(160, 100);
-	l->ls_pos[2] = vector(240, 100);
-	l->ls_pos[3] = vector(80, 150);
-	l->ls_pos[4] = vector(160, 150);
-	l->ls_pos[5] = vector(240, 150);
-	l->ls_pos[6] = vector(80, 200);
-	l->ls_pos[7] = vector(160, 200);
-	l->ls_pos[8] = vector(240, 200);
-	l->ls_pos[9] = vector(160, 400);
-	l->ls_09[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n0.xpm", &img.x, &img.y);
-	l->ls_09[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n1.xpm", &img.x, &img.y);
-	l->ls_09[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n2.xpm", &img.x, &img.y);
-	l->ls_09[3] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n3.xpm", &img.x, &img.y);
-	l->ls_09[4] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n4.xpm", &img.x, &img.y);
-	l->ls_09[5] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n5.xpm", &img.x, &img.y);
-	l->ls_09[6] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n6.xpm", &img.x, &img.y);
-	l->ls_09[7] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n7.xpm", &img.x, &img.y);
-	l->ls_09[8] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n8.xpm", &img.x, &img.y);
-	l->ls_09[9] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/n9.xpm", &img.x, &img.y);
-	l->ls_09_dark[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n0.xpm", &img.x, &img.y);
-	l->ls_09_dark[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n1.xpm", &img.x, &img.y);
-	l->ls_09_dark[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n2.xpm", &img.x, &img.y);
-	l->ls_09_dark[3] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n3.xpm", &img.x, &img.y);
-	l->ls_09_dark[4] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n4.xpm", &img.x, &img.y);
-	l->ls_09_dark[5] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n5.xpm", &img.x, &img.y);
-	l->ls_09_dark[6] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n6.xpm", &img.x, &img.y);
-	l->ls_09_dark[7] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n7.xpm", &img.x, &img.y);
-	l->ls_09_dark[8] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n8.xpm", &img.x, &img.y);
-	l->ls_09_dark[9] = mlx_xpm_file_to_image(l->params.mlx, "./assets/09/darker/n9.xpm", &img.x, &img.y);
+	i = -1;
+	set_vector(&pos, 80, 100);
+	while (++i <= 9)
+	{
+		tmp = add_str(add_str("./assets/09/n", ft_itoa(i)), ".xpm");
+		l->ls_09[i] = path_to_image(l, tmp);
+		free(tmp);
+		tmp = add_str(add_str("./assets/09/darker/n", ft_itoa(i)), ".xpm");
+		l->ls_09_dark[i] = path_to_image(l, tmp);
+		free(tmp);
+		if (i % 3 == 0)
+			set_vector(&pos, 80, pos.y + 50);
+		else
+			pos.x += 80;
+		l->ls_pos[i] = pos;
+	}
 }

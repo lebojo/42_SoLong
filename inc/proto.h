@@ -13,11 +13,11 @@
 #ifndef PROTO_H
 # define PROTO_H
 
-# include "inc/libft/libft.h"
+# include "libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "inc/minilibx_macos/mlx.h"
+# include "minilibx_macos/mlx.h"
 # include "struct.h"
 
 # define NAME "BeachBall in a park simulator 2023 XTREME EDITION"
@@ -49,7 +49,6 @@ void		add_collision(t_level *l, t_vector pos, int nb_col);
 /*MOVEMENTS			*/
 int			int_to_dir(int key);
 void		collision(t_level *l, t_vector pos, t_vector edge);
-void		player_process(t_level *l);
 void		collect_coins(t_level *l);
 void		exit_level(t_level *l);
 
@@ -59,11 +58,14 @@ void		draw_level(t_level *lvl);
 void		draw_screen(t_level *l);
 void		draw_bcgk(t_level *lvl, t_vector start, t_vector end);
 void		draw_hud(t_level *l);
-void		draw_around_player(t_level *l);
 void		draw_image(t_level *l, char *path, t_vector p);
+void		draw_wall(t_level *l);
+int			draw_cell(t_level *lvl, char c, t_vector pos);
 
 /*PHYSICS			*/
-int			physics_process(t_level *l);
+void		friction(t_level *l);
+void		move_player(t_level *l);
+void		friction(t_level *l);
 void		move_player(t_level *l);
 
 /*UTILS				*/
@@ -74,6 +76,8 @@ t_vector	vector(int x, int y);
 char		*add_str(char *s1, char *s2);
 char		*lvl_name_extractor(char *s);
 int			check_ext(char *s, char *ext);
+void		*path_to_image(t_level *l, char *path);
+void		create_new_window(t_level *l, t_vector size);
 
 /*MATRIX			*/
 void		add_collision(t_level *l, t_vector pos, int nb_col);
@@ -84,7 +88,8 @@ int			key_press(int keycode, t_level *lvl);
 int			key_release(int keycode, t_level *lvl);
 
 /*ANIMATION			*/
-void		animation_process(t_level *l);
+void		anim_coins(t_level *l);
+void		anim_player(t_level *l);
 
 /*HUD				*/
 void		hud_info(t_level *l, char *s);
@@ -92,6 +97,12 @@ char		*score_to_str(t_level *l);
 
 /*VALIDITY			*/
 int			can_collect_coins(t_level *l);
+
+/*PROCESS			*/
+int			level_selector_process(t_level *l);
+void		animation_process(t_level *l);
+int			physics_process(t_level *l);
+void		player_process(t_level *l);
 
 /*
 MENU
@@ -104,5 +115,8 @@ void		reset_keys(t_level *lvl);
 
 /*LEVEL_SELECTOR	*/
 void		start_menu(t_level *l);
+void		draw_menu_level(t_level *l, t_vector *p);
+void		player_position(t_level *l);
+void		launch_level(t_level *l);
 
 #endif

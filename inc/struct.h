@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:42:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 01:38:21 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 03:56:15 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ typedef struct s_path
 	char		*coins[8];
 	t_range		cf;
 	char		*blck;
+	char		*pb;
+	char		*qb;
+	char		*logo;
 	int			width;
 }	t_path;
 
@@ -76,10 +79,10 @@ typedef struct s_player
 typedef struct s_level
 {
 	t_data		data;
-	t_path		texture;
+	t_path		tx;
 	t_player	player;
 	t_vector	*collision_map;
-	t_vector	*coins_map;
+	t_vector	*map_c;
 	t_vector	exit;
 	int			nb_col;
 	char		*map;
@@ -90,7 +93,7 @@ typedef struct s_level
 	t_vector	ls_pos[10];
 	char		*ls_09[10];
 	char		*ls_09_dark[10];
-	t_params	params;
+	t_params	prm;
 }	t_level;
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:44:23 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/21 22:22:36 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 03:56:44 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "proto.h"
+#include "inc/proto.h"
 
 char	*score_to_str(t_level *l)
 {
@@ -27,10 +27,13 @@ char	*score_to_str(t_level *l)
 
 void	hud_info(t_level *l, char *s)
 {
-	int	margin;
+	int		margin;
+	char	*tmp;
 
 	draw_hud(l);
-	mlx_string_put(l->params.mlx, l->params.mlx_win, 10, 21, 0xFFFFFF, add_str("level: ", l->name));
+	tmp = add_str("level: ", l->name);
+	mlx_string_put(l->prm.mlx, l->prm.mlx_win, 10, 21, 0xFFFFFF, tmp);
 	margin = (ft_strlen(l->name) + 7) * 10;
-	mlx_string_put(l->params.mlx, l->params.mlx_win, margin, 21, 0xFFFFFF, add_str(add_str(s, " - Time: "), ft_itoa(l->time)));
+	tmp = add_str(add_str(s, " - Time: "), ft_itoa(l->time));
+	mlx_string_put(l->prm.mlx, l->prm.mlx_win, margin, 21, 0xFFFFFF, tmp);
 }

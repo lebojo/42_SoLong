@@ -10,46 +10,13 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "proto.h"
-
-void	set_vector(t_vector *v, int x, int y)
-{
-	v->x = x;
-	v->y = y;
-}
-
-int	vector_collide(t_vector v1, t_vector v2, int width)
-{
-	int	v1_r;
-	int	v1_b;
-	int	v2_r;
-	int	v2_b;
-
-	v1_r = v1.x + width - 2;
-	v1_b = v1.y + width - 2;
-	v2_r = v2.x + width - 5;
-	v2_b = v2.y + 20;
-	set_vector(&v1, v1.x + 2, v1.y + 2);
-	set_vector(&v2, v2.x + 5, v2.y + 15);
-	if (v1.x <= v2_r && v1_r >= v2.x && v1.y <= v2_b && v1_b >= v2.y)
-		return (1);
-	return (0);
-}
+#include "inc/proto.h"
 
 void	erase_coins(t_level *l, t_vector pos_erase)
 {
-	pos_erase.x = (pos_erase.x / l->texture.width) + 1;
-	pos_erase.y = (pos_erase.y / l->texture.width) - 1;
+	pos_erase.x = (pos_erase.x / l->tx.width) + 1;
+	pos_erase.y = (pos_erase.y / l->tx.width) - 1;
 	l->map_matrix[pos_erase.y][pos_erase.x] = l->data.empty;
-}
-
-t_vector	vector(int x, int y)
-{
-	t_vector	res;
-
-	res.x = x;
-	res.y = y;
-	return (res);
 }
 
 char	*add_str(char *s1, char *s2)

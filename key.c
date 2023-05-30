@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 03:37:31 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/09 03:37:52 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/05/30 03:56:44 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "proto.h"
+#include "inc/proto.h"
 
 int	key_press(int keycode, t_level *lvl)
 {
