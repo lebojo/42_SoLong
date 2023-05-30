@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:42:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/29 01:21:26 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 01:38:21 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_data
 
 typedef struct s_path
 {
-	char		*empty;
+	char		*empty[2];
 	char		*wall;
 	char		*player[4];
 	t_range		pf;

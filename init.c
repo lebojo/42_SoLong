@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:22:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/22 01:05:30 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 01:42:28 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	init_player_frames(t_level *l)
 {
 	t_vector	img;
 
-	l->texture.player[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player1.xpm", &img.x, &img.y);
-	l->texture.player[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player2.xpm", &img.x, &img.y);
-	l->texture.player[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player3.xpm", &img.x, &img.y);
-	l->texture.player[3] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player4.xpm", &img.x, &img.y);
+	l->texture.player[0] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player_1.xpm", &img.x, &img.y);
+	l->texture.player[1] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player_2.xpm", &img.x, &img.y);
+	l->texture.player[2] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player_3.xpm", &img.x, &img.y);
+	l->texture.player[3] = mlx_xpm_file_to_image(l->params.mlx, "./assets/player_frames/player_4.xpm", &img.x, &img.y);
 	l->texture.pf.nb = 0;
 	l->texture.pf.max = 3;
 }
@@ -62,7 +62,8 @@ void	init_level(t_level *level)
 	level->collision_map = malloc(sizeof(t_vector));
 	init_player_frames(level);
 	init_coins_frames(level);
-	level->texture.empty = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor.xpm", &img_width, &img_height);
+	level->texture.empty[0] = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor.xpm", &img_width, &img_height);
+	level->texture.empty[1] = mlx_xpm_file_to_image(level->params.mlx, "./assets/floor2.xpm", &img_width, &img_height);
 	level->texture.wall = mlx_xpm_file_to_image(level->params.mlx, "./assets/wall.xpm", &img_width, &img_height);
 	level->texture.exit = mlx_xpm_file_to_image(level->params.mlx, "./assets/enemy.xpm", &img_width, &img_height);
 	level->texture.blck = mlx_xpm_file_to_image(level->params.mlx, "./assets/blck.xpm", &img_width, &img_height);

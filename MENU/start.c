@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:03:45 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/21 17:31:24 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 01:56:55 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ void	draw_bcgk(t_level *lvl, t_vector start, t_vector end)
 		pos.y = start.y;
 		while (pos.y < end.y)
 		{
-			mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.empty, pos.x, pos.y);
+			if ((pos.x * pos.y) % 10 == 0)
+				mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.empty[1], pos.x, pos.y);
+			else
+				mlx_put_image_to_window(lvl->params.mlx, lvl->params.mlx_win, lvl->texture.empty[0], pos.x, pos.y);
 			pos.y += lvl->texture.width;
 		}
 		pos.x += lvl->texture.width;

@@ -6,7 +6,7 @@
 /*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 01:15:19 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/25 15:40:08 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/05/30 02:03:44 by lebojo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	draw_cell(t_level *lvl, char c, t_params prm, t_vector pos)
 {
 	if (c == '\n')
 		return (0);
-	mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.empty, pos.x, pos.y);
+	if ((pos.x == pos.y * 3 || pos.y == pos.x * 2) && c == lvl->data.empty)
+		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.empty[1], pos.x, pos.y);
+	else
+		mlx_put_image_to_window(prm.mlx, prm.mlx_win, lvl->texture.empty[0], pos.x, pos.y);
 	if (c == lvl->data.coins)
 		draw_coins(lvl, prm, pos);
 	else if (c == lvl->data.exit)

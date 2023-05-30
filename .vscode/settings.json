@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"mlx.h": "c",
+		"__node_handle": "c",
+		"ios": "c",
+		"chrono": "c",
+		"complex": "c",
+		"vector": "c"
+	}
+}
