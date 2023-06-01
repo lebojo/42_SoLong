@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 23:05:41 by jchapell          #+#    #+#             */
-/*   Updated: 2023/06/01 05:08:58 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/06/01 18:39:35 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	free_level(t_level *l)
 	free(l->map_c);
 	if (l->nb_col > 0)
 		free(l->collision_map);
-	if (l->nb_en> 0)
+	if (l->nb_en > 0)
 		free(l->enemy_map);
 }

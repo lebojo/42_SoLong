@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:41:39 by lebojo            #+#    #+#             */
-/*   Updated: 2023/06/01 04:47:43 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/06/01 18:42:34 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,14 @@ void	level_validity(t_level *l)
 
 	cpy = map_extract(l);
 	if (can_collect_coins(l) == 0)
+	{
+		free_matrix(l->data.size.y, cpy);
 		exit(error("Coin(s) can't be collected"));
+	}
 	if (!exit_check(l->exit_mx, l->data.size, cpy))
 	{
 		free_matrix(l->data.size.y, cpy);
 		exit(error("Exit not reachable"));
 	}
+	free_matrix(l->data.size.y, cpy);
 }
