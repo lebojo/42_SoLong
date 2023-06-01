@@ -6,7 +6,7 @@
 #    By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/21 21:58:57 by jchapell          #+#    #+#              #
-#    Updated: 2023/06/01 03:11:45 by jchapell         ###   ########.fr        #
+#    Updated: 2023/06/01 18:51:52 by jchapell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ OBJ := $(patsubst %,$(OBJ_PATH)%,$(OBJ1))
 # Build .o first
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@echo [CC] $<
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(INC_PATH)     
 
 # Build final Binary
