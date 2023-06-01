@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:03:45 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 22:50:21 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/06/01 05:05:00 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	draw_menu(t_level *lvl)
 	lvl->player.pos.y = 180;
 	lvl->player.pos.x = 110;
 	lvl->prm.mlx_win = mlx_new_window(lvl->prm.mlx, 350, 350, NAME);
+	lvl->data.coins_max = -1;
 	draw_bcgk(lvl, vector(0, 0), vector(350, 350));
 	draw_but(lvl);
 	draw_player(lvl);

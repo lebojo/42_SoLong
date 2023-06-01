@@ -29,13 +29,9 @@ char	*add_str(char *s1, char *s2, int f)
 	i = -1;
 	ii = 0;
 	while (s1[++i])
-	{
 		res[i] = s1[i];
-	}
 	while (s2[ii])
-	{
 		res[i++] = s2[ii++];
-	}
 	res[i] = '\0';
 	if (f == 1)
 		free(s1);
@@ -72,8 +68,8 @@ int	check_ext(char *s, char *ext)
 	int	end_s;
 	int	end_ext;
 
-	end_s = ft_strlen(s);
-	end_ext = ft_strlen(ext);
+	end_s = ft_strlen(s) + 1;
+	end_ext = ft_strlen(ext) + 1;
 	while (s[--end_s] == ext[--end_ext])
 		if (end_ext == 0)
 			return (1);

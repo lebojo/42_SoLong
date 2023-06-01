@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_cell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 03:09:11 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 03:56:44 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/06/01 04:28:27 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	draw_cell(t_level *lvl, char c, t_vector pos)
 		draw_image(lvl, lvl->tx.exit, pos);
 	else if (c == lvl->data.wall && pos.y - 1 < lvl->player.pos.y)
 		draw_image(lvl, lvl->tx.wall, pos);
+	else if (c == lvl->data.enemy)
+		draw_image(lvl, lvl->tx.enemy, pos);
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 04:19:22 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 04:19:23 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/06/01 04:52:56 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	parse(char *file_path, t_level *lvl)
 	int		i;
 	char	buffer;
 
+	if (check_ext(file_path, ".ber") == 0)
+		exit(error("A map <.ber> expected"));
 	lvl->map = malloc(sizeof(char) * file_char_len(file_path));
 	file = open(file_path, O_RDONLY);
 	i = 0;
 	if (file == -1)
 		return ;
 	info("Parsing map...");
-	if (check_ext(file_path, ".ber") == 0)
-		exit(error("A map <.ber> expected"));
 	while (read(file, &buffer, sizeof(char)) != 0)
 	{
 		lvl->map[i++] = buffer;

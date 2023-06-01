@@ -34,7 +34,6 @@ int	int_to_dir(int key)
 void	collision(t_level *l, t_vector pos, t_vector edge)
 {
 	int	i;
-	int	col;
 
 	i = -1;
 	if (pos.x > edge.x - 54 || pos.x < 22)
@@ -43,12 +42,20 @@ void	collision(t_level *l, t_vector pos, t_vector edge)
 		l->player.vel.y *= -1;
 	while (++i <= l->nb_col)
 	{
-		col = vector_collide(pos, l->collision_map[i], l->tx.width);
-		if (col > 0)
+		if (vector_collide(pos, l->collision_map[i], l->tx.width))
 		{
 			l->player.vel.x *= -1;
 			l->player.vel.y *= -1;
 			break ;
+		}
+	}
+	i = -1;
+	while (l->nb_en && ++i <= l->nb_en)
+	{
+		if (vector_collide(pos, l->enemy_map[i], l->tx.width))
+		{
+			info("You die miserably by touching an enemy");
+			clean_exit(l);
 		}
 	}
 }
@@ -85,9 +92,10 @@ void	end_level(t_level *l)
 		clean_exit(l);
 	free_level(l);
 	set_vector(&l->data.size, -1, 1);
-	l->data.coins_max = 0;
+	l->data.coins_max = -1;
 	l->player.coins = 0;
 	l->nb_col = 0;
+	l->nb_en = 0;
 	if (l->player.ls_position + 1 == l->player.max_level)
 		l->player.max_level++;
 	start_menu(l);

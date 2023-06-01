@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebojo <lebojo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:42:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 03:56:15 by lebojo           ###   ########.fr       */
+/*   Updated: 2023/06/01 03:56:56 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_data
 	char		wall;
 	char		player;
 	char		exit;
+	char		enemy;
 	char		coins;
 }	t_data;
 
@@ -40,6 +41,7 @@ typedef struct s_path
 {
 	char		*empty[2];
 	char		*wall;
+	char		*enemy;
 	char		*player[4];
 	t_range		pf;
 	char		*exit;
@@ -81,9 +83,12 @@ typedef struct s_level
 	t_path		tx;
 	t_player	player;
 	t_vector	*collision_map;
+	t_vector	*enemy_map;
 	t_vector	*map_c;
 	t_vector	exit;
+	t_vector	exit_mx;
 	int			nb_col;
+	int			nb_en;
 	char		*map;
 	char		**map_matrix;
 	int			key[5];

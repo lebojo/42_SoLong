@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include "minilibx_macos/mlx.h"
 # include "struct.h"
+# include <stdio.h>
 
 # define NAME "BeachBall in a park simulator 2023 XTREME EDITION"
 # define NAME_SHORT "BBIAPS"
@@ -34,6 +35,8 @@ void		parse(char *file_path, t_level *lvl);
 
 /*VALIDITY			*/
 int			parse_validity(t_level lvl);
+int			coin_check(t_vector pos, t_vector max, char **map);
+void		level_validity(t_level *l);
 
 /*CONSOLE			*/
 int			error(char *str);
@@ -79,6 +82,7 @@ void		create_new_window(t_level *l, t_vector size);
 /*MATRIX			*/
 void		add_collision(t_level *l, t_vector pos, int nb_col);
 void		add_coins(t_level *l, t_vector pos, int nb_coins);
+void		add_enemy(t_level *l, t_vector pos, int nb_en);
 
 /*KEY				*/
 int			key_press(int keycode, t_level *lvl);

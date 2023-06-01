@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 03:37:31 by jchapell          #+#    #+#             */
-/*   Updated: 2023/05/31 00:18:40 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/06/01 05:03:54 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	key_release(int keycode, t_level *lvl)
 int	clean_exit(t_level *l)
 {
 	info("Clean exit");
-	if (l->name)
+	if (l->data.coins_max != -1)
 		free_level(l);
 	exit(info("Game closed"));
 }

@@ -6,13 +6,11 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 05:41:39 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/30 23:29:54 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/06/01 04:47:43 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/proto.h"
-
-void	print_matrix(char **map, t_vector size);
 
 int	coin_check(t_vector pos, t_vector max, char **map)
 {
@@ -23,6 +21,29 @@ int	coin_check(t_vector pos, t_vector max, char **map)
 		|| map[pos.y][pos.x] == '1')
 		return (0);
 	if (map[pos.y][pos.x] == '0' || map[pos.y][pos.x] == 'C')
+	{
+		map[pos.y][pos.x] = 'X';
+		if (coin_check(vector(pos.x + 1, pos.y), max, map) == 1
+			|| coin_check(vector(pos.x, pos.y + 1), max, map) == 1
+			|| coin_check(vector(pos.x - 1, pos.y), max, map) == 1
+			|| coin_check(vector(pos.x, pos.y - 1), max, map) == 1)
+		{
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int	exit_check(t_vector pos, t_vector max, char **map)
+{
+	if (map[pos.y][pos.x] == 'P')
+		return (1);
+	if (pos.y + 1 > max.y || pos.x + 1 > max.x
+		|| pos.y < 0 || pos.x < 0
+		|| map[pos.y][pos.x] == '1')
+		return (0);
+	if (map[pos.y][pos.x] == '0'
+		|| map[pos.y][pos.x] == 'C' || map[pos.y][pos.x] == 'E')
 	{
 		map[pos.y][pos.x] = 'X';
 		if (coin_check(vector(pos.x + 1, pos.y), max, map) == 1
@@ -87,18 +108,16 @@ int	can_collect_coins(t_level *l)
 	return (1);
 }
 
-void	print_matrix(char **map, t_vector size)
+void	level_validity(t_level *l)
 {
-	int	i;
-	int	j;
+	char	**cpy;
 
-	i = -1;
-	j = -1;
-	while (++i < size.y)
+	cpy = map_extract(l);
+	if (can_collect_coins(l) == 0)
+		exit(error("Coin(s) can't be collected"));
+	if (!exit_check(l->exit_mx, l->data.size, cpy))
 	{
-		while (++j <= size.x)
-			ft_putchar_fd(map[i][j], 0);
-		ft_putchar_fd('\n', 0);
-		j = 0;
+		free_matrix(l->data.size.y, cpy);
+		exit(error("Exit not reachable"));
 	}
 }

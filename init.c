@@ -6,7 +6,7 @@
 /*   By: jchapell <jchapell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 14:22:18 by lebojo            #+#    #+#             */
-/*   Updated: 2023/05/31 00:16:52 by jchapell         ###   ########.fr       */
+/*   Updated: 2023/06/01 03:00:27 by jchapell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	init_tx(t_level *l)
 	l->tx.empty[0] = path_to_image(l, "./assets/floor.xpm");
 	l->tx.empty[1] = path_to_image(l, "./assets/floor2.xpm");
 	l->tx.wall = path_to_image(l, "./assets/wall.xpm");
-	l->tx.exit = path_to_image(l, "./assets/enemy.xpm");
+	l->tx.enemy = path_to_image(l, "./assets/enemy.xpm");
+	l->tx.exit = path_to_image(l, "./assets/exit.xpm");
 	l->tx.blck = path_to_image(l, "./assets/blck.xpm");
 	l->tx.pb = path_to_image(l, "./assets/start_title.xpm");
 	l->tx.qb = path_to_image(l, "./assets/quit_title.xpm");
@@ -59,6 +60,7 @@ void	init_level(t_level *l)
 	l->data.wall = '1';
 	l->data.exit = 'E';
 	l->data.player = 'P';
+	l->data.enemy = 'V';
 	set_vector(&l->data.size, -1, 1);
 	l->data.coins_max = 0;
 	l->player.coins = 0;
@@ -68,6 +70,7 @@ void	init_level(t_level *l)
 	l->player.ls_position = 0;
 	l->player.max_level = 1;
 	l->nb_col = 0;
+	l->nb_en = 0;
 	l->collision_map = malloc(sizeof(t_vector));
 	init_tx(l);
 	info("Game initiated");
